@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>반응형 네비게이션</title>
+<style type="text/css">
+*{
+	margin:0;
+	padding:0;
+}
+body{
+	background:url(../files/windmill.jpg) no-repeat right bottom fixed;
+	background-size:cover;
+}
+a:link, a:hover, a:visited{
+	color:#fff;
+	text-decoration: none;
+	text-shadow:1px 1px 0 #283744;
+}
+nav{
+	width:100%; 
+	height:auto;
+	background:#34495e;
+	font-size:1.2em;
+	font-weight:bold;
+	position:relative;
+}
+nav ul{
+	display:none;
+	
+}
+nav ul li{
+	display:block;
+	width:100%;
+	text-align:center;
+	border-bottom:1px solid #576979;
+}
+nav ul li a{
+	line-height:50px;
+}
+nav a#trigger{ 
+	display:block;
+	background-color:#283744;
+	width:100%;
+	padding-left:15px;
+	line-height:40px;
+	position:relative;	
+}
+/* 요소의 끝부분에 생성된 콘텐츠를 추가 */
+nav a#trigger::after{/* ::after은 끝부분을 말함 */
+	/* content 텍스트, 이미지 등을 추가 하기 위해 사용, 배경으로 처리해서 내용을 비어있게 처리함 */
+	content:"";
+	background:url('../files/nav.png') no-repeat;
+	width:30px;
+	height:30px;
+	display:inline-block;
+	position:absolute;
+	right:15px;
+	top:10px;
+} 
+
+@media screen and (min-width:721px){
+	nav{
+		height:40px;
+	}
+	nav ul{
+		display:block;
+		width:720px;
+		height:30px;
+		padding:0;
+		margin:0 auto;
+	}
+	nav ul li{ 
+		/* box-sizong은 박스의 크기를 화면에 표시하는 방식을 변경하는 속성.
+		넓이와 높이를 지정할 때 테두리를 지정하면 넓이(500)+테두리의 두께(20)로
+		실제 넓이(520)가 더 커지는 현상 
+		box-sizing:border-box; 로 지정하면 테두리(20)가 있어도 지정한 넓이(500)만큼
+		실제 넓이(500)로 만들어서 보여줌.
+		*/
+		box-sizing:border-box; 
+		display:inline-block;
+		width:120px;
+		border-bottom:0;
+		border-right:1px solid #576979; 
+		margin-left:-6px; 
+	}
+	nav ul li:last-child{
+		border-right:0;
+	}
+	nav ul li a{
+		font-size:1em;
+		line-height:40px;
+	}
+	nav a#trigger{
+		display:none; 
+	}
+	
+}
+</style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js">
+</script>
+<script type="text/javascript">
+$(function(){
+	$('#trigger').on('click',function(){
+		/* 
+		slideToggle을 이용하면 ul 태그에 
+		style="display:block"(노출),
+		style="display:none"(숨김) 이므로 화면을 넓게 desktop환경으로 하면 메뉴가 안보이는 상황이 생김
+		*/
+		$('nav ul').slideToggle();
+	});
+	
+	//윈도우의 사이즈를 변경할 때 이벤트 발생
+	$(window).resize(function(){
+		//윈도우창의 넓이 구하기
+		let w = $(window).width();
+		//데스크탑 넓이(721이상)이고 nav ul이 숨겨져있는지 체크 
+		if(w >= 721 && $('nav ul').is(':hidden')){ //is(':hidden'):함수는 해당 요소가 숨겨져 있는지 여부를 확인하는 jQuery 함수
+			/* 
+			ul 태그가 slideToggle를 이용해서 숨김 처리되면 화면을 확대할 때 
+			메뉴가 숨겨져서 안보이는 현상이 일어나기 때문에 다시 메뉴를 보여지게 처리하기 위해서 
+			style="display:none"(숨김)속성을 제거함.
+			*/
+			$('nav ul').removeAttr('style');//위에서 slideToggle한 것을 없애면서 메뉴가 보이도록함.
+		}
+			
+	});
+});
+</script>
+</head>
+<body>
+	<nav>
+		<a href="#" id="trigger">Menu</a>
+		<ul>
+			<li><a href="#">Home</a></li>
+			<li><a href="#">About</a></li>
+			<li><a href="#">Web</a></li>
+			<li><a href="#">Design</a></li>
+			<li><a href="#">Map</a></li>
+			<li><a href="#">Contact</a></li>
+		</ul>
+	</nav>
+</body>
+</html>

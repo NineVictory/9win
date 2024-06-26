@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>로컬 스토리지</title>
+<script type="text/javascript">
+window.onload=function(){
+	const save = document.getElementById('save');
+	//이벤트 연결
+	save.onclick=function(){
+		//사용자가 입력한 번호,이름,주소를 읽어옴
+		const num = document.getElementById('num');
+		const name = document.getElementById('name');
+		const addr = document.getElementById('addr');
+		
+		//로컬 스토리지에 개별적으로 저장
+		/*
+		localStorage.num = num.value;
+		localStorage.name = name.value;
+		localStorage.addr = addr.value;
+		*/
+		
+		//JSON(JavaScript Object Notation-자바스크립를 객체 형식으로
+		//     만드는 것을 의미) 형식의 문자열로 만듬
+		//let memberStr = '{"num":'+num.value+',"name":"'+name.value+'","addr":"'+addr.value+'"}';
+		
+		//저장하기
+		//localStorage.member = memberStr;
+		
+		const memberStr = {};
+		memberStr.num = num.value;
+		memberStr.name = name.value;
+		memberStr.addr = addr.value;
+		
+		//자바스크립트 객체를 JSON 문자열로 변환
+		localStorage.member = JSON.stringify(memberStr); //위에 주석처럼 수작업을 안해도됨.
+		
+		
+		//입력창 초기화
+		num.value = '';
+		name.value = '';
+		addr.value = '';
+	};
+	
+	const load = document.getElementById('load');
+	//이벤트 연결
+	load.onclick=function(){
+		//저장된 문자열 읽어오기
+		let loadedMemberStr = localStorage.member;
+		//문자열을 객체로 변환	
+		const memberObj = JSON.parse(loadedMemberStr);
+		//객체의 속성 호출
+		alert(memberObj.num + ',' + memberObj.name + ',' 
+				                     + memberObj.addr);
+	};
+	
+};
+</script>
+</head>
+<body>
+번호 <input type="text" id="num"><br>
+이름 <input type="text" id="name"><br>
+주소 <input type="text" id="addr"><br>
+<button id="save">저장</button>
+<button id="load">불러오기</button>
+</body>
+</html>

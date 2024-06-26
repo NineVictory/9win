@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>form</title>
+</head>
+<body>
+<form action = "do.jsp" method="post">
+<!-- 
+	fieldset : 폼을 그룹핑하는 역할 
+	legend : 제목 지정
+-->
+	<fieldset>
+		<legend>프로젝트 정보</legend>
+		<ul>
+			<li>
+				<!-- 
+					label : 입력 창 옆에 '아이디'나'비밀번호'처럼 붙여놓은 텍스트를 말함. 
+						    label 태그를 사용하면 폼 요소와 레이블 텍스트가 서로 연결되어 있다는 것을
+						    브라우저가 알 수 있음.
+				 -->
+				 <label for = "name">이름</label> <!-- input에 있는  id="name" 과 연결하기위해 for = "name"을 씀-->
+				 <!-- required : 입력 필수 지정 -->
+				 <!-- autofocus : 페이지 로드시 자동 포커스 지정 -->
+				 <input type = "text" name ="name" id="name" required autofocus>
+			</li>
+			<li>
+				<label>중요도</label>
+				<!-- range : 슬라이드 막대로 표시하는 숫자 필드 -->
+				<!-- oninput 이벤트 속성에 명시된 코드를 이용해서
+				range를 변경해서 정해진 값을 output에 표시  -->
+				<input type ="range" name ="priority" id = "priority"
+						min ="0" max = "10" value = "0"
+						oninput ="result.value=parseInt(priority.value)">
+						<!-- output : 계산의 결과를 삽입할 때 -->
+				<output name = "result"></output>
+			</li>
+			<li>
+				<label for = "hour">예상시간</label>
+				<!-- number : 숫자 필드 -->
+				<input type = "number" name="hours" id = "hours" 
+						min ="0" max = "24" >
+			</li>
+			<li>
+				<label for = "start_date">시작 날짜</label>
+				<!-- date : 날짜 필드 -->
+				<input type = "date" name ="start_date" id="start_date">
+			</li>
+			<li>
+				<label for ="start_time">시작 시간</label>
+				<!-- time : 시간 필드 -->
+				<input type = "time" name = "start_time" id = "start_time">
+			</li>
+			<li>
+				<label for = "email">이메일</label>
+				<!-- email : 이메일 필드 -->
+				<input type = "email" name = "email" id = "email">
+			</li>
+			<li>
+				<label for ="url">URL</label>
+				<!-- URL : URL 필드 -->
+				<input type = "url" name ="url" id ="url">
+			</li>
+			<li>
+				<label for ="search">검색</label>
+				<!-- search : search 필드 -->
+				<input type = "search" name ="search" id ="search">
+			</li>
+			<li>
+				<input type = "submit" value ="전송">
+			</li>
+		</ul>
+	</fieldset>
+</form>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>실습</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js">
+</script>
+<script type="text/javascript">
+$(function(){
+/* 
+[실습]
+도서 정보를 table에 표시하시오. 배열에 도서명,분류,정상가격 저장.  할인가격은 연산에 의해서 만들기
+--------------------------
+도서명		분류		정상가격	할인가격(5%)
+자바		It		20,000	19,000원
+미술사		예술		30,000	28,500원
+노래연습	예술		10,000	9,500원
+한국사		역사		50,000	47,000원
+ */
+
+	//배열 생성
+	const book = [
+		{name:'자바',category:'It',price:20000}, 
+		{name:'미술사',category:'예술',price:30000},
+		{name:'노래연습',category:'예술',price:10000},
+		{name:'한국사',category:'역사',price:50000}
+	];
+	
+	let output =' <tr><th>도서명</th><th>분류</th><th>정상가격</th><th>할인가격(5%)</th></tr>'; 
+		//	배열	  , 배열의 요소에 접근할 때 호출되는 메서드
+	$.each(book,function(index,item){
+		//index : 배열의 index
+		//item : 배열의 요소(객체)
+		output += '<tr>';
+		output += '<td>'+item.name +'</td>';
+		output += '<td>' +item.category+'</td>';
+		output += '<td>' +item.price.toLocaleString()+'원</td>';
+		output += '<td>' +(item.price*0.95).toLocaleString()+'원</td>';
+		output +='</tr>';
+	});
+		// 기존태그				새로만든태그
+		$('#output').append(output);
+
+});
+</script>
+</head>
+<body>
+	<table id="output" border="1"></table>
+</body>
+</html>

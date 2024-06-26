@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>eval</title>
+</head>
+<body>
+<script type="text/javascript">
+	//eval(string) : string을 자바스크립트 코드로 실행
+	let willEval = '';
+	//(주의) 세미콜론(;)ㅇ,ㄹ 명시해야 동작함.
+	willEval +='var number =10;'; //자바스크립트로 변했기 때문에 ''안에 세미콜론(;)을 넣어야됨.
+	willEval+='alert(number);';
+	
+	eval(willEval);
+	alert(number);
+	
+</script>
+</body>
+</html>

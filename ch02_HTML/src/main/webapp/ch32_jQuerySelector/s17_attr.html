@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>문서 객체의 속성 처리</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+//문서가 준비 완료되면 매개변수로 전달된 함수 실행
+//$(document).ready(function(){});
+$(function(){//이렇게 생략해서 사용가능
+	//attr 메서드는 속성과 관련된 모든 기능을 수행
+	
+	//하나의 속성만 제어
+	//$('img').attr('width',100); //넓이를 100으로 조절. 높이를 명시하지않으면 브라우저가 자동으로 조정해줌. 원래 사진은 매우 큼.
+	
+	//복수의 속성을 제어
+	//$('img').attr('width',100).attr('height',100);
+	
+	//객체 형태로 명시 (복수를 명시하고 싶을 떈 중괄호 사용. 키와 벨류의 쌍으로 명시)
+	$('img').attr({
+		width:200,
+		height:200
+	});
+});
+</script>
+</head>
+<body>
+	<img src="../files/Desert.jpg">
+	<img src="../files/Koala.jpg">
+	<img src="../files/Penguins.jpg">
+</body>
+</html>

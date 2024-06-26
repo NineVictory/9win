@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>캔버스 연습</title>
+<script type="text/javascript">
+window.onload = function(){
+	const canvas = document.getElementById('canvas');
+	if(canvas.getContext){
+		const context = canvas.getContext('2d');
+		
+	//색칠된 삼각형
+	context.beginPath();
+	context.moveTo(50,50); //시작점 표시
+	context.lineTo(150,50); 
+	context.lineTo(50,150);
+	
+	context.closePath();
+	context.fill();//도형 내부를 채우는 역할
+	
+	//빨간색 테두리 삼각형
+	context.beginPath(); //패스 시작
+	context.moveTo(80,80);//시작점 표시
+	context.lineTo(200,100);//첫번째 선 
+	context.lineTo(100,200);//두번째 선  
+	
+	context.closePath(); //패스 끝 (자동으로 마지막 선이 생기면서 선들을 연결시킴)
+	context.strokeStyle = 'rgb(200,0,0)';
+	context.stroke();
+		
+	}else{
+		alert('브라우저가 캔버스를 지원하지 않습니다.');
+	}
+};
+</script>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="300">
+	</canvas>
+</body>
+</html>

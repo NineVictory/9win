@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>querySelector</title>
+<script type="text/javascript">
+	window.onload=function(){
+		//명시한 선택자를 통해 해당 선택자를 사용하는 태그를 반환
+											 //CSS 선택자
+		let header1 = document.querySelector('#header_1');
+		let header2 = document.querySelector('#header_2');
+		
+		header1.innerHTML = '서울';
+		header2.innerHTML = '부산';
+		
+		let input1 = document.querySelector('#my_form #input_1');
+		input1.value = '홍길동';
+		
+		//CSS 선택자를 명시하면 여러개의 태그를 반환하는 상황에서도
+		//querySelector는 같은 태그의 최상단의 태그만 접근 가능
+		let element = document.querySelector('li');//유니크하지 않는 정보(li는 여러개 있기에)를 넣을 때
+		element.style.backgroundColor = 'yellow'//background-color로 사용못함 하이픈을 못써서 c를 대문자로 입력 
+		
+		//그러므로 쿼리셀렉터는 주로 id를 넣어서 사용할 때 주로 사용한다. 
+	};
+</script>
+</head>
+<body>
+	<h1 id ="header_1">Header</h1>
+	<h1 id ="header_2">Header</h1>
+	<form id = "my_form">
+		<input type="text" id="input_1">
+	</form>
+	
+	<ul>
+		<li>Apple</li>
+		<li>Banana</li>
+		<li>Orange</li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>float</title>
+<style type="text/css">
+div#a{
+	width:74%;
+	height:300px;
+	background-color:pink;
+	float:left;
+}
+div#b{
+	width:24%;
+	height:300px;
+	background-color:skyblue;
+	float:right;
+}
+div#c{
+	/* 위에서 float를 적용하였는데 width크기가 남으면 그 사이에 들어간다. 만약 float가 100%가되면 yellow가 보이지않고 글만 보임 
+	그걸 방지하기 위해서 clear:both;를 써줌. */
+	clear:both;/* float 속성 무효화 */ 
+	width:100%;
+	height:50px;
+	background-color:yellow; 
+}
+</style>
+</head>
+<body>
+<div id="a">하하</div>
+<div id ="b">호호</div>
+<div id ="c">크크</div>
+</body>
+</html>

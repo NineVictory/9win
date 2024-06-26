@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>상속</title>
+</head>
+<body>
+<script type="text/javascript">
+	//자바스크립트는 프로토타입을 이용해서 상속 구현(자바는 extends)
+	function Human(age){
+		this.age = age;
+	}
+	//상속을 위해서 정의한 것들
+	Human.prototype.type = '사람';
+	Human.prototype.getType = function(){
+		return this.type;
+	};
+	Human.prototype.getAge = function(){
+		return this.age;
+	};
+	const human = new Human(20);
+	document.write('human.type ='+human.type+'<br>');
+	document.write('human.age ='+human.age+'<br>');
+	document.write('human.getType() ='+human.getType()+'<br>');
+	document.write('human.getAge() ='+human.getAge()+'<br>');
+	document.write('------------------------------------------<br>');
+	
+	//자식 생성자 함수 정의
+	function Student(age) {
+		this.age = age;
+	}
+	Student.prototype = Human.prototype;
+	//프로토타입의 생성자를 재정의(정의하지 않아도 구동상 문제 없음)생성자함수 명칭이 Human으로 바뀌기 때문에 Sudent로 재정의 한것. 
+	Student.prototype.constructor = Student;
+	
+	//Human를 상속받은 Student 객체 생성
+	const student = new Student(40);
+	document.write('student.type ='+student.type+'<br>');
+	document.write('student.age ='+student.age+'<br>');
+	document.write('student.getType() ='+student.getType()+'<br>');
+	document.write('student.getAge() ='+student.getAge()+'<br>');
+	document.write('------------------------------------------<br>');
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

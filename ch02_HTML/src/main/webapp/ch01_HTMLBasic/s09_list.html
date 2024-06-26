@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>목록</title>
+</head>
+<body>
+<h3>순서 없는 목록</h3>
+<ul>
+	<li>유치원</li>
+	<li>초등학교</li>
+	<li>중학교</li>
+	<li>고등학교</li>
+	<li>대학교</li>
+</ul>
+
+<ul type = "circle">
+	<li>자바</li>
+	<li>오라클</li>
+	<li>HTML</li>
+</ul>
+
+<ul type = "square">
+	<li>자바</li>
+	<li>오라클</li>
+	<li>HTML</li>
+</ul>
+
+<h3>순서 있는 목록</h3>
+<ol>
+	<li>서울</li>
+	<li>부산</li>
+	<li>광주</li>
+</ol>
+<!-- reversed : 항목을 역순으로 표시 -->
+<ol type = "1" reversed = "reversed"><!-- type이 1이면 숫자로 보여준다. -->
+	<li>서울</li>
+	<li>부산</li>
+	<li>광주</li>
+</ol>
+<!--type 속성을 이용해서 순서 표시를 숫자,문자 지정 가능  -->
+<ol type = "A">
+	<li>서울</li>
+	<li>부산</li>
+	<li>광주</li>
+</ol>
+
+<ol type = "a">
+	<li>서울</li>
+	<li>부산</li>
+	<li>광주</li>
+</ol>
+
+<ol type = "I">
+	<li>서울</li>
+	<li>부산</li>
+	<li>광주</li>
+	<li>인천</li>
+	<li>대구</li>
+	<li>목포</li>
+	<li>광주</li>
+</ol>
+<ol type = "i">
+	<li>서울</li>
+	<li>부산</li>
+	<li>광주</li>
+	<li>인천</li>
+	<li>대구</li>
+	<li>목포</li>
+	<li>광주</li>
+</ol>
+
+<!-- 순서 있는 목록 : 100번부터 시작해서 중간에 200번으로 점프하기 -->
+<ol type = "1" start = "100">
+	<li>서울</li>
+	<li>부산</li>
+	<li>광주</li>
+	<li value = "200">인천</li>
+	<li>대구</li>
+	<li>목포</li>
+	<li>광주</li>
+</ol>
+
+<h3>ul 태그 하위 요소로 ol태그 사용</h3>
+<ul type ="square">
+	<li>로멘틱코미디
+		<ol>
+			<li>해리와 샐리가 만났을 떄</li>
+			<li>당신이 잠든 사이에</li>
+		</ol>
+	</li>
+	<li>액션
+		<ol>
+			<li>범죄도시4</li>
+			<li>미션임파서블</li>
+			<li>나쁜녀석들</li>
+		</ol>
+	
+	<li>공포
+		<ol>
+			<li>13일의 금요일</li>
+			<li>파묘</li>
+			<li>스크림</li>
+		</ol>
+	
+</ul>
+
+<h3>dl,dt,dd 태그 : 설명 목록 만들기</h3>
+<!-- <dl> 태그는 제목과 설명이 한 쌍인 설명 목록을 만듬  -->
+<dl>
+	<dt>올레1코스</dt><!-- 제목 -->
+	<dd>코스 : 시흥 초등학교 - 광치기 해변</dd> <!-- 설명 -->
+	<dd>거리 : 14.6km(4~5시간)</dd>
+	<dt>올레2코스</dt>
+	<dd>코스 : 광치기 해변 - 온평 포구</dd>
+	<dd>거리 : 14.5km(4~5시간)</dd>
+</dl>
+
+
+
+
+
+
+</body>
+</html>

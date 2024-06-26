@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>toString</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//빈 객체 생성 
+		const student = {};
+
+		document.write(student);
+		document.write('<br>');
+		document.write(student.toString() + '<br>');
+		document.write('======================================<br>');
+		//객체에 속성 추가
+		student.이름 = '박문수';
+		student.취미 = '악기';
+		student.특기 = '프로그래밍';
+
+		//객체에 메서드 추가
+		//원래 내장되어 있는 toString() 메서드를 사용자가 정의한 새로운 함수로 덮어씌우는 방식 즉, 재정의한 것
+		student.toString = function() {
+			let msg = '';
+			for (let key in this) { //this를 써준다면 student를 바꿔도 사용가능하기 때문에 편리함
+				if (key != 'toString') {//toString을 제외 (재정의하는 함수를 만들었지만 조건문으로 출력되지않게함)
+					msg += key + ':' + this[key] + '<br>'
+				}
+
+			}
+			/* for(let key in student){
+			msg += key + ':' +student[key] +'<br>'
+			} */
+			return msg; //Object에 있는 toString()도 return값이 있기 때문에 return을 해줘야됨.
+		};
+
+		document.write(student.toString() + '<br>');
+		document.write('======================================<br>');
+		document.write(student);//일반적으로 toString() 메서드는 객체의 내용을 문자열로 반환하는데 보통 생략하기 때문에
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>캔버스 연습</title>
+<script type="text/javascript">
+window.onload = function(){
+	const canvas = document.getElementById('canvas');
+	if(canvas.getContext){
+		const context = canvas.getContext('2d');
+		context.fillStyle = 'rgba(255,51,0,1.0)';//완전 불투명
+		context.fillRect(10,10,150,30);
+		
+		context.fillStyle = 'rgba(255,51,0,0.8)';
+		context.fillRect(10,40,150,30);
+		
+		context.fillStyle = 'rgba(255,51,0,0.6)';
+		context.fillRect(10,70,150,30);
+		
+		context.fillStyle = 'rgba(255,51,0,0.4)';
+		context.fillRect(10,100,150,30);
+		
+		context.fillStyle = 'rgba(255,51,0,0.2)';
+		context.fillRect(10,130,150,30);
+		
+	}else{
+		alert('브라우저가 캔버스를 지원하지 않습니다.');
+	}
+};
+</script>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="300">
+	</canvas>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- 
+뷰포트 : 스마트폰 화면에서 실제 내용이 표시되는 영역
+
+속성				설명				사용 가능한 값				기본값
+width			뷰포트의 넓이		device-width 또는 크기		브라우저 기본 값
+height			뷰포트의 높이		device-height 또는 크기		브라우저 기본 값
+user-scalable	확대/축소 가능 여부	yes or no 				yes
+initial-scale	초기 확대/축소		값 1~10					1
+minimum-scale	최소 확대/축소		값 1~10					0.25
+maximum-scale	최대 확대/축소		값 1~10					1.6
+
+ -->
+ <meta name = "viewport" content = "width=device-width,initial-scale=1">
+<title>media query</title>
+<style type="text/css">
+body{
+	font-size:30pt;
+}
+/* 767px이하 */
+@media screen and (max-width:767px){/* 최대넓이가 767까지만 스타일을 적용하겠다. */
+	h1{color:red;}
+	ul{
+		list-style:none;
+	}
+	ul li{
+		font-size:40%;
+	}
+}
+/* 768px~991px */
+@media screen and (min-width:768px) and (max-width:991px) {
+	h1{color:blue;}
+	ul{
+		list-style:none;
+	}
+	ul li{
+		display:inline;
+		background-color:skyblue;
+		font-size:60%;
+		
+	}
+}
+/* 992px이상 */
+@media screen and (min-width:992px){
+	h1{color:green;}
+	ul{
+		list-style:none;
+	}
+	ul li{
+		background-color:green;
+		color:white;
+		display:inline;
+	}
+}
+	
+</style>
+</head>
+<body>
+<h1>미디어 쿼리</h1>
+<ul>
+	<li>서울</li>
+	<li>부산</li>
+	<li>대구</li>
+	<li>광주</li>
+	<li>인천</li>
+</ul>
+</body>
+</html>

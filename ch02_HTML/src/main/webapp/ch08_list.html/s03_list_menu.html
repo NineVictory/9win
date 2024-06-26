@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>리스트를 활용한 메뉴</title>
+<style type="text/css">
+	ul.menu1{
+		list-style:none; /* 리스트의 점 아이콘 제거 */
+	}
+	ul.menu1 li{
+		display:inline;/* 리스트를 가로로 표시 */
+	}
+	ul.menu1 li a{
+		text-decoration:none;
+		background:#c00;
+		color:#fff;
+		/* a태그는 공간개념이 없기 때문에 width와height가 적용되지 않으므로
+		 display:inline-block을 명시해서 공간블럭을 줘야됨.*/
+		display:inline-block;
+		width:100px;
+		height:30px; 
+		padding-top:3px; /* 태그 안의 상단 여백 */
+		padding-left:10px; /* 태그 안의 왼쪽 여백 */
+	}
+	ul.menu1 li a:hover{
+		background-color:#336699; 
+		text-decoration:none;
+	}
+	ul.menu2{
+		list-style:none;
+	}
+	ul.menu2 li{
+		display:inline;
+	}
+	ul.menu2 li a {
+		text-decoration:none;
+		background-color:#c00;
+		color:#FFF; 
+		width:100px;
+		height:40px;
+		display:table-cell;
+		text-align:center;/* 가로 정렬 */
+		vertical-align:middle;/* 새로 정렬 */
+		
+	}
+	ul.menu2 li a:hover{
+		background-color:#336699; 
+		text-decoration:none;
+	}
+	ul.menu3{
+		list-style:none;
+	}
+	ul.menu3 li{
+		float:left;  /* 왼쪽을 기준으로 가로로 배치 *//* display:inline;는 display:flex;와 겹쳐서 flex가 작동이안됨. */
+	}
+	
+	ul.menu3 li a {
+		text-decoration:none;
+		background-color:#c00;
+		margin:2px;/* 태그 밖 여백 */
+		color:#FFF; 
+		width:100px;
+		height:40px;
+		display:flex;
+		align-items:center;/* 세로정렬 */
+		justify-content:center/* 가로정렬 */
+	}
+	ul.menu3 li a:hover{
+		background-color:#336699; 
+		text-decoration:none;
+	}
+</style>
+</head>
+<body>
+	<ul class = "menu1">
+		<li><a href="#">Company</a></li>
+		<li><a href="#">Product</a></li>
+		<li><a href="#">Service</a></li>
+		<li><a href="#">Community</a></li>
+	</ul>
+	<ul class="menu2">
+		<li><a href="#">Company</a></li>
+		<li><a href="#">Product</a></li>
+		<li><a href="#">Service</a></li>
+		<li><a href="#">Community</a></li>
+	</ul>
+	<ul class="menu3">
+		<li><a href="#">Company</a></li>
+		<li><a href="#">Product</a></li>
+		<li><a href="#">Service</a></li>
+		<li><a href="#">Community</a></li>
+	</ul>
+</body>
+</html>

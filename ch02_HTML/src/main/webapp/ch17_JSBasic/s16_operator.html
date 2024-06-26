@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>실습</title>
+</head>
+<body>
+<script type="text/javascript">
+
+/* [실습] 
+음식점에서 국수를 주문하는데 할인 행사를 해서 한그릇에 20% 할인해준다.
+국수값은 3,500원이고 국수값과 주문할 수량을 입력해서 지불금액을 출력하시오.
+[입력예시]
+prompt로 입력 -국수값, 국수 수량 입력
+[출력예시]
+지불 금액 : 14000원
+ */
+ 
+ var noodle = prompt('국수값 :', '');
+var count = prompt('국수 수량 :', '');
+
+var money = noodle*count*0.8;/* 곱셈을하면 자동으로 형변환해줌 */
+
+document.write('지불금액 :'+money+'원');
+</script>
+</body>
+</html>

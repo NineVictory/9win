@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>class</title>
+</head>
+<body>
+<script type="text/javascript">
+	//클래스 정의
+	class Person{
+		//생성자
+		constructor(name){
+			//인스턴스 프로퍼티
+			this.name = name;
+		}
+		//메서드
+		sayHi(){ //function 키워드 생략한 단순형태 
+			document.write('Hi my name is '+this.name);
+		}
+		//정적 메서드
+		static sayHello(){
+			document.write('Hello!!');
+		}
+	}
+	//객체 생성
+	const me = new Person('Annie');
+	//속성 호출
+	document.write(me.name);
+	document.write('<br>');
+	//메서드 호출
+	me.sayHi();
+	document.write('<br>');
+	//정적 메서드 호출(클래스명을 붙여야됨)
+	Person.sayHello();//Person은 클래스명.me는 객체명이기 때문에 호출안됨
+</script>
+</body>
+</html>

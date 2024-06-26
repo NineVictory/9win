@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>html/text</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//html 메서드는 태그의 내용을 제어 (HTML 태그 허용)
+	$('div').html('<h1>날씨가 화창한 오후</h1>');
+	//text 메서드는 태그의 내용을 제어(text로만 표시)
+	$('p').text('<h1>놀이동산의 곰인형</h1>');
+	
+	//접근하는 태그의 내용을 다르게 설정하기
+	$('div.header').html(function(index){
+		return '<h2>Header-'+index+'</h2>';
+	});
+	
+	//태그의 내용을 읽어서 내용을 새롭게 가공한 후 태그에 다시 설정
+	$('h1').html(function(index,html){
+		//index : 배열의 인덱스
+		//html : 태그의 내용
+		return '**' +html+'**';
+	});
+});
+</script>
+</head>
+<body>
+	<div></div>	
+	<p></p>
+	<!-- 배열로 인식됨. 위에 index -->
+	<div class="header"></div>
+	<div class="header"></div>
+	<div class="header"></div>
+	
+	<h1>서울-0</h1>
+	<h1>서울-1</h1>
+	<h1>서울-2</h1>
+</body>
+</html>

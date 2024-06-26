@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>class</title>
+</head>
+<body>
+<script type="text/javascript">
+	class Person{
+		//클레스 필드
+		name = 'Smith';
+		//메서드
+		getName = function(){
+			return this.name;
+		};
+	}
+	//객체 생성
+	const me = new Person();
+	document.write(me);
+	document.write('<br>');
+	
+	document.write(me.name);
+	document.write('<br>');
+	
+	document.write(me.getName());
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>속성제거</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//3초 후에 매개변수로 전달된 함수를 실행
+	setTimeout(function(){
+		$('h1').removeAttr('align'); //속성제거 
+	},3000);
+});
+</script>
+</head>
+<body>
+	<h1 align = "center" data-index ="0">Header-0</h1>
+	<h1 data-index="1">Header-1</h1>
+	<h1 data-index="2">Header-2</h1>
+</body>
+</html>

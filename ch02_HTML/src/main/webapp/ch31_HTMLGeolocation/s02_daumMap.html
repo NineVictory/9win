@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>다음맵 사용하기</title>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=db3165e66ef2a77e38937dec96c353af">
+</script>
+<script type="text/javascript">
+/*
+1.http://developers.kakao.com/ 로 이동
+2.로그인
+3.웹 개발 시작 앱 생성
+4.설정 - 일반
+5. 플랫폼 - 웹 http://localhost:8080 으로 지정. ip사용시 ip 지정
+6.위에 스크립트에 있는 src 다음에 오는 JavaScript 키 복사해서 script에 표시
+7.자바스크립트 관련 지도 가이드 - https://apis.map.kakao.com/web/guide
+*/
+window.onload = function(){
+	if(!navigator.geolocation){
+		alert('본 기기가 위치정보를 지원하지 않습니다.');
+		return;
+	}
+	
+	navigator.geolocation.getCurrentPosition(function(position){
+		//위도
+		let lat = position.coords.latitude;
+		//경도
+		let lon = position.coords.longitude;
+		
+		//지도를 표시할 div
+		const mapContainer = document.getElementById('map');
+		
+		//지도에 설정할 옵션 값 지정
+		const mapOption = {
+				center:new daum.maps.LatLng(lat,lon),//지도의 중심 좌표
+				level:3 // 지도의 확대 레벨
+		};
+		
+		//지도 생성
+		const map = new daum.maps.Map(mapContainer,mapOption);
+		
+		//마커가 표시될 위치
+		const pos = new daum.maps.LatLng(lat,lon);
+		
+		//마커 생성
+		const marker = new daum.maps.Marker({
+			position:pos,
+			clickable:true // 마커를 클릭했을 때 지도의 클릭 이벤트 처리
+		});
+		
+		//마커를 지도에 표시
+		marker.setMap(map);
+		
+		//마커를 클릭했을 때 마커 위에 표시할 인포윈도우 내용 명시
+		let iwContent = '<div style="padding:10px;width:250px;height:38px;">' 
+						+ lat +','+lon+'<br>나 여기 있어요!!</div>';
+		
+		//인포윈도우 생성
+		const infowindow = new daum.maps.InfoWindow({
+			content:iwContent,
+			removable:true //x버튼 표시 
+		});
+		
+		//마커에 클릭 이벤트 등록
+		daum.maps.event.addListener(marker,'click',function(){
+			//마커 위에 인포윈도우를 표시
+			infowindow.open(map,marker);
+		});
+	});
+};
+</script>
+</head>
+<body>
+<div id = "map" style = "width:100%; height:500px;"></div>
+</body>
+</html>

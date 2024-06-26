@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>draggable</title>
+<style type="text/css">
+	#draggable {width:150px;height:150px;padding:0.5em;}
+</style>
+<link rel = "stylesheet" href="../css/jquery-ui.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js">
+</script>
+<script type="text/javascript" src="../js/jquery-ui.min.js">
+</script>
+<script type="text/javascript">
+$(function(){
+	//태그 드래그하기
+	$('#draggable').draggable();
+});
+</script>
+</head>
+<body>
+	<div id="draggable" class="ui-widget-content">
+		<p>Drag me around</p>
+	</div>
+</body>
+</html>

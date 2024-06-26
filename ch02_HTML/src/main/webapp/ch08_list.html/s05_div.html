@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>div</title>
+<style type="text/css">
+div.a{
+	width:500px;
+	height:100px;
+	border:solid 1px orange;
+	text-align:center;/* 가로 정렬 */
+	vertical-align:middle;/* 세로 정렬 */
+	/* div의 공간을 테이블의 셀 공간으로 지정해서 vertical-align이 적용되도록 처리 */
+	display:table-cell;/* 이걸 해주지않으면  vertical-align:middle;을 해줘도 인식이안됨.*/
+}
+div.b{
+	width:500px;
+	height:100px;
+	border:solid 1px orange;
+	display:flex;
+	align-items:center;/* 세로정렬 */
+	justify-content:center;/* 가로정렬 */
+}
+</style>
+</head>
+<body>
+<div class="a">
+	<span>하하</span>
+</div>
+<br>
+<div class="b">
+	<span>호호</span>
+</div>
+</body>
+</html>

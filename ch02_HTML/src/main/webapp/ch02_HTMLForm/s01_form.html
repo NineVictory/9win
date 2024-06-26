@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>form</title>
+</head>
+<body>
+<h3>기본 폼</h3>
+<!--  
+서버에 데이터를 전송할 때는 form태그 안에 하위 태그 input,select,textarea 등을 명시하고 
+태그에 데이터를 입력해서 전송함. form 태그 밖에 명시한 태그에 입력한 데이터는 전송되지않음.
+-->
+<form action ="a.jsp" method = "get">
+	이름 <input type = "text" name ="name" size = "10" maxlength ="15"> <br>
+	<!-- 텍스트창은 10정도 사이즈고 입력가능한 텍스트는 15개 까지 가능하다. -->
+	비밀번호<input type = "password" name="password" size = "10"><br>
+	파일 업로드<input type = "file" name="image"><br>
+	좋아하는 계절<br>
+	<!-- checkbox는 다중 선택 가능 -->
+	<input type = "checkbox" name = "season" value = "봄">봄
+	<input type = "checkbox" name = "season" value = "여름">여름
+	<input type = "checkbox" name = "season" value = "가을">가을
+	<input type = "checkbox" name = "season" value = "겨울">겨울
+	<br>
+	국적<br>
+	<!-- radio는 단일 선택 가능 -->
+	<input type = "radio" name = "country" value = "대한민국">대한민국
+	<input type = "radio" name = "country" value = "영국">영국
+	<input type = "radio" name = "country" value = "프랑스">프랑스
+	<br>
+	지역<br>
+	<!-- 단일 선택 -->
+	<select name = "region">
+		<option value ="서울">서울</option>
+		<option value ="부산">부산</option>
+		<option value ="광주">광주</option>
+	</select>
+	<br>
+	희망 여행지<br>
+	<select name = "trip" multiple = "multiple">
+		<option value ="프랑스">프랑스</option>
+		<option value ="스위스">스위스</option>
+		<option value ="이탈리아">이탈리아</option>
+		<option value ="스페인">스페인</option>
+	</select>
+	<br>
+	직업<br>
+	<select name="job">
+		<optgroup label = "전문직">
+			<option value = "의사">의사</option>
+			<option value = "프로그래머">프로그래머</option>
+			<option value = "애견훈련사">애견훈련사</option>
+		</optgroup>
+		<optgroup label = "스포츠선수">
+			<option value ="농구선수">농구선수</option>
+			<option value ="축구선수">축구선수</option>
+			<option value ="야구선수">야구선수</option>
+		</optgroup>
+	</select>
+	<br>
+	내용<br>
+	<!-- textarea : 여러줄 입력 태그 -->
+	<textarea rows="5" cols="50" name="content"></textarea>
+	<br>
+	<input type ="submit" value = "전송">
+	<input type = "reset" value = "초기화">
+	
+</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

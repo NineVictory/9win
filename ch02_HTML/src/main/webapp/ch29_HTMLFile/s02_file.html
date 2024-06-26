@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>이미지 미리보기</title>
+<script type="text/javascript">
+window.onload = function() {
+	const image = document.getElementById('image'); 
+	
+	const file = document.getElementById('file');
+	//이벤트 연결
+	file.onchange = function(){
+		if(!file.files[0]){//if(file.files[0]==undeined) 라고 써도 같은 뜻임
+			alert('파일을 선택하세요!');
+			//기본이미지 노출
+			image.src="../files/face.png";
+			return; //submit인 경우만 return false임 
+		}
+		
+		//FileReader 객체 생성
+		const reader = new FileReader();
+		//이미지 읽기
+		reader.readAsDataURL(file.files[0]);
+		reader.onload = function() {
+			//image.setAttribute('src',reader.result);
+			image.src = reader.result;
+		};
+	};
+	
+};
+</script>
+</head>
+<body>
+<h2>이미지 미리보기</h2>
+<div>
+	<img id="image" src="../files/face.png" width="200" height="200" alt="Image Preview">
+	
+</div>
+<input type="file" id="file" accept="image/gif,image/png,imga/jpeg">
+</body>
+</html>

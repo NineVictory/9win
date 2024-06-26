@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>click</title>
+<style type="text/css">
+div{
+	background-color:yellow; 
+}
+</style>
+
+<script type="text/javascript">
+	//윈도우가 로드될 때 onload에 연결된 함수 호출 이벤트 처리
+	window.onload=function(){
+		const header = document.getElementById('header');
+		
+		function whenClick(){
+			alert('CLICK');
+		}
+		//이벤트 연결
+			// 이벤트 속성		이벤트 핸들러 
+		header.onclick = whenClick;
+		
+		//이벤트 연결을 하는 것이 아니라 함수가 1회 호출되고 이벤트 발생시 함수 호출이 되지 않음.(에러창이 먼저뜨고 그다음 화면이 나온다.)
+		//header.onclick = whenClick();
+	};
+</script>
+</head>
+<body>
+	<div id ="header">클릭</div>
+</body>
+</html>

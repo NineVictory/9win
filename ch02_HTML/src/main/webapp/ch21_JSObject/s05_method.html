@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>메서드</title>
+</head>
+<body>
+<script type="text/javascript">
+	//ES6부터 function 키워드를 생략한 축약 표현을 사용 가능
+	//객체 생성
+	const obj ={
+			//속성 지정
+			name:'Peter',
+			//메서드지정
+			play:function(){
+				document.write('열심히 일하다');
+			},
+			//메서드 축약 표현
+			sayHi() { //:function이 생략됨
+				document.write('Hi!'+this.name);
+			}
+	};
+	//객체의 메서드 호출
+	obj.sayHi();
+		
+</script>
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>(주)대명엠씨</title>
+<style type="text/css">
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Dokdo&family=Hi+Melody&display=swap');
+@import url(http://fonts.googleapis.com/css?family=Oleo+Script);
+
+p.article-date {
+	font-family: 'Hi Melody', serif;
+	font-size: 20pt;
+}
+/* 기본 설정 */
+*{
+	margin:0;
+	padding:0;
+}
+body{
+	font-family:'맑은 고딕','Malgun Gothic',Gothic,sans-serif;
+	width:100%;
+	margin:0 auto;
+	background:white;
+}
+
+.logo {
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 1px);
+}
+#page_wrap{
+	background:white;
+	margin:40px 0;
+	padding:10px 20px;
+	border-radius:5px;
+	box-shadow: 0 2px 6px rgba(100,100,100,0.3);
+}
+a{
+	text-decoration:none;
+}
+ul{
+	list-style:none;
+}
+/* 헤더 구성하기 */
+#main_header{
+	padding:40px 50px;
+}
+.master-title{
+	font-size:30px;
+	color:#181818;
+}
+.master-desc{
+	font-size:15px;
+	font-weight:500;
+	color:#383838;
+}
+/* 네비게이션 및 풀다운 메뉴 구성하기 */
+#main_nav{
+ font-family:'Oleo Script',cursive;
+ 	text-align: center;
+	border-top:1px solid #C8C8C8;
+	border-bottom:1px solid #C8C8C8;
+	margin-bottom:20px;
+	height:40px;
+}
+.pull-left{
+	display: inline-block;
+	
+}
+.pull-right{
+	float: right;
+}
+/* 메뉴 타이블 */
+.menu-title{
+	display:block;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	padding:5px 20px;
+}
+/* 메뉴를 가로 방향으로 배치 */
+.outer-menu-item{
+	float:left;
+	position:relative;
+}
+/* 메뉴 위에 커서를 올려놓았을 떄 스타일 */
+.outer-menu-item:hover{
+	background:black;
+	color:white;
+}
+/* 커서를 메뉴에 올려놓았을 떄 하위 메뉴 설정 */
+.outer-menu-item:hover .inner-menu{
+	display:block;
+}
+
+/* 기본 하위 메뉴 설정 */
+.inner-menu{
+	display:none;/* 하위 메뉴 숨기기 */
+	position:absolute;
+	top:40px;
+	left:0;
+	width:100%;
+	background:white;
+	box-shadow:0 2px 6px rgba(5,5,5,0.9);
+	z-index:100;
+	text-align:center;
+}
+/* 하위 메뉴 링크에 스타일 적용 */
+.inner-menu-item > a {
+	display:block;
+	padding:5px 10px;
+	color:black;
+}
+.inner-menu-item > a:hover{
+	background:black;
+	color:white;
+}
+/* 검색 양식 추가하기(내비게이션 내부 검색) */
+.search-bar{
+	height:26px;
+	padding:7px;
+	
+}
+.input-search{
+	display:block;
+	float:left;
+	background-color:#FFFFFF;
+	border:1px solid #CCCCCC;
+				/*상좌 상우 하우 하좌  */
+	border-radius:15px 0 0 15px;
+	width:120px;
+	height:26px;
+	padding:0 0 0 10px;
+	font-size:12px;
+	color:#555555;
+}
+.input-search:focus{
+	border-color:rgba(82,168,236,0.8);
+	/* border 바깥 외곽선 */
+	outline:0;
+	box-shadow:0 1px 1px rgba(0,0,0,0.05);
+}
+/* 검색 버튼 스타일 처리 */
+.input-search-submit{
+	width:50px;
+	height:26px;
+				/*상좌 상우 하우 하좌 */
+	border-radius:0 15px 15px 0;
+	border:1px solid #CCCCCC;
+	margin-left:-1px; 
+	
+}
+/* 본문*/
+#content{
+	overflow:hidden;
+}
+#main_section {
+    margin: 0 auto; /* 왼쪽과 오른쪽 마진을 자동으로 조정하여 수평 중앙으로 정렬 */
+    width: 100%
+  
+}
+
+/* 내용 */
+article:nth-child(odd) {
+    background-color: #f5f2d5 /* 홀수 번째 article 배경색을 원하는 색상으로 변경하세요 */
+}
+
+article:nth-child(even) {
+    background-color: #d4d4cd; /* 짝수 번째 article 배경색을 원하는 색상으로 변경하세요 */
+}
+.article-header{
+	padding:20px 0;
+}
+.article-title{
+	font-size:25px;
+	font-weight:500;
+	padding-bottom:10px;
+}
+.article-date{
+	font-size:13px;
+}
+.article-body{
+	font-size:14px;
+	padding-left:100px;
+}
+article {
+    background-color: #d4d4cd;
+}
+/* 사이드 메뉴 */
+.aside-list{
+	padding:10px 0 30px 0;
+}
+.aside-list > h3{
+	font-size:15px;
+	font-weight:600;
+}
+.aside-list li a{
+	margin-left:8px;
+	font-size:13px;
+	color:#6C6C6C;
+}
+/* 커서 처리 */
+.outer-menu-item, .input-search-submit{
+	cursor:pointer;
+}
+
+.company-info {
+    padding: 20px;
+    background-color: #ffffff;
+    text-align: center; /* 내용을 중앙으로 정렬합니다. */
+    position: relative; /* 내용 위에 회색 선을 그리기 위해 상대 위치 지정합니다. */
+}
+
+.company-info .contact-info {
+    font-size: 14px; /* 정보 텍스트 크기 설정 */
+    color: #555; /* 정보 텍스트 색상 설정 */
+}
+
+.company-info .contact-info span {
+    display: block; /* 각 정보를 한 줄씩 표시하도록 설정 */
+    margin-bottom: 5px; /* 각 정보 사이 여백 설정 */
+}
+
+.company-info .contact-info b {
+    font-weight: bold; /* 각 정보의 볼드체 설정 */
+}
+.company-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px); /* 내용의 좌우 여백만큼 회색 선의 길이를 설정합니다. */
+    height: 1px;
+    background-color: #868B94; /* 회색 선의 색상을 설정합니다. */
+}
+
+.company-info .contact-info {
+    font-size: 14px;
+    color: #555;
+    margin-top: 50px; /* 내용과 상단 간격을 설정합니다. */
+}
+ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    ul li {
+        display: inline-block;
+        margin-right: 10px; /* 각각의 영상 사이의 간격 조절 */
+    }
+</style>
+</head>
+<body>
+<div id ="page_wrap">
+	<!-- 머리말 시작 -->
+	<header id = "main_header">
+		<hgroup>
+			<h1 class="master-title">Vanadium BIZ</h1>
+			<h2 class="master-desc">바나듐 혈당강하쌀</h2>
+			<img class = "logo" src="../files/1.png" width="400" height="150">
+		</hgroup>
+		
+	</header>
+	<!-- 머리말 끝 -->
+	<!-- 네비게이션 시작 -->
+	<nav id ="main_nav">
+		<!-- 메뉴 시작 -->
+		<div class="pull-left">
+			<ul class = "outer-menu">
+				<li class = "outer-menu-item">
+					<span class="menu-title">회사소개</span>
+					<!-- sub 메뉴 -->
+					<ul class = "inner-menu">
+						<li class="inner-menu-item"><a href = "#">오시는길</a></li>
+						<li class="inner-menu-item"><a href = "#">소속</a></li>
+					</ul>
+				</li>
+				<li class = "outer-menu-item">
+					<span class="menu-title">공지사항</span>
+					<!-- sub 메뉴 -->
+					<ul class = "inner-menu">
+						<li class="inner-menu-item"><a href = "#">QnA</a></li>
+						<li class="inner-menu-item"><a href = "#">자유게시판</a></li>
+					</ul>
+				</li>
+				<li class = "outer-menu-item">
+					<span class="menu-title">서비스</span>
+					<!-- sub 메뉴 -->
+					<ul class = "inner-menu">
+						<li class="inner-menu-item"><a href = "#">쌀구매</a></li>
+						<li class="inner-menu-item"><a href = "#">떡구매</a></li>
+						<li class="inner-menu-item"><a href = "#">판매장소</a></li>
+
+					</ul>
+				</li>
+				<li class = "outer-menu-item">
+					<span class="menu-title">비전</span>
+					<!-- sub 메뉴 -->
+					<ul class = "inner-menu">
+					</ul>
+				</li>
+				<li class = "outer-menu-item">
+					<span class="menu-title">마이페이지</span>
+					<!-- sub 메뉴 -->
+					<ul class = "inner-menu">
+					</ul>
+				</li>
+				<li class = "outer-menu-item">
+					<span class="menu-title">상품안내</span>
+					<!-- sub 메뉴 -->
+					<ul class = "inner-menu">
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<!-- 메뉴끝 -->
+		<!-- 검색 시작 -->
+		<div class="pull-right">
+			<div class="search-bar">
+				<form>
+					<input type ="search" class="input-search">
+					<input type ="submit" class="input-search-submit" value="검색">
+				</form>
+			</dvi>
+		</div>
+		<!-- 검색 끝 -->
+	</nav>
+	<!-- 네비게이션 끝 -->
+	<!-- 내용 시작 -->
+	<div id = "content">
+		<!-- 본문 좌측 영역 시작 -->
+		<section id="main_section">
+			<article>
+				<div class="article-header">
+					<p class="article-date">건강한 한끼 식사 혈당강하쌀</p>
+					<p class="article-date">바나듐이 듬뿍들어 혈당조절은 물론<br>합병증 완화에도 효과적!</p>
+				</div>
+				<div class="article-body">
+					<img src="../files/1번.png" 
+												width="430" height="500">
+					<img src="../files/2번.png" 
+												width="430" height="500">
+					<img src="../files/3번.png" 
+												width="430" height="500">
+					<br><br>
+					<p class="article-date">
+					혈당강하쌀은 당뇨병인들의 바람인 인체 필수 3대영양소 중 가장 큰 비중을 차지하는 탄수화물(밥)을 <br>
+					섭취하여 혈당강하 효과 및 당뇨 치료와 동시에 고지혈증을 개선해 성인병 예방 및 일반인의 면역력 증진에 <br>
+					도움을 주기 위해 만든 쌀입니다.
+!							</p>
+				</div>
+			</article>
+			<article>
+				<div class="article-header">
+					<p class="article-date">신규 추진중인 사업</p>
+					<p class="article-date">Vanadium mineral future plan biz</p>
+				</div>
+				<div class="article-body">
+				
+					<img src="../files/신제품1.png" width="350" height="350">
+					<img src="../files/신제품2.png" width="350" height="350">	
+					<img src="../files/신제품3.png" width="350" height="350">
+					<img src="../files/신제품4.png" width="350" height="350">
+					<img src="../files/신제품5.png" width="350" height="350">
+					<br><br>
+					
+					<p class="article-date">
+					현재 개발완료 및 테스트 진행중인 상품들이며 1,2차 테스트 이후 국내유통을 거쳐 판매될 예정 
+					</p>
+					
+					<br>					
+				</div>
+			</article>
+		</section>
+		<!-- 본문 좌측 영역 끝 -->
+		<table border="1">
+    <tr>
+        <td>
+            <b>혈당강하쌀 관련 영상(방송 / jtbc 알짜왕 출연)</b>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li><iframe width="560" height="315" src="https://www.youtube.com/embed/2YKCPf7iKrw?si=reuDYn9i4qNWz9V6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></li>
+                <li><iframe width="560" height="315" src="https://www.youtube.com/embed/d5L2fK9HnZ0?si=u5yN0aBKnWWdD87P" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></li>
+                <li><iframe width="560" height="315" src="https://www.youtube.com/embed/BmdOkJdlY5k?si=xxmHprESKF-LVFZk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+	</div>
+	<!-- 내용 끝 -->
+	<!-- 꼬리말 시작 -->
+	<footer id ="main-footer">
+		<section class="company-info">
+
+    <div  class="contact-info">
+  		<span><b>회사명</b> 주식회사 대명엠씨</span>
+        <span><b>대표</b> 구한서</span>
+        <span><b>설립일</b> 2023년 07월18일</span>
+        <span><b>전화번호</b> 02-417-3385</span>
+        <span><b>주소</b> 서울시 송파구 양재대로66길 44 / 403호</span>
+        <span><b>팩스</b> 02-417-3386</span>
+        <span><b>전자우편</b> ywchae@naver.com</span>
+        <span><b>사업종목</b> 농수축산물 제조 유통</span>	
+        
+    </div>
+</section>
+	</footer>
+	<!-- 꼬리말 끝 -->
+	
+</div>
+
+</body>
+</html>

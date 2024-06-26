@@ -1,0 +1,27 @@
+	<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>trigger를 이용한 이벤트 강제 발생</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js">
+</script>
+<script type="text/javascript">
+$(function(){
+	//이벤트 연결
+	$('h1').on('click',function(){
+		$(this).html(function(index,html){
+			return html+'*'
+		});
+	});//end of on (on이 끝나고 트리거가 실행되어야됨)
+	//1초마다 매개변수로 전달된 함수를 실행
+	setInterval(function(){
+						//이벤트 타입
+		$('h1').trigger('click');
+	},1000);
+});
+</script>
+</head>
+<body>
+	<h1>Start :</h1>
+</body>
+</html>

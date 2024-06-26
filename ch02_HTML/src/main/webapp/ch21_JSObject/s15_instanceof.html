@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>instanceof</title>
+</head>
+<body>
+<script type="text/javascript">
+	//생성자 함수 정의
+	function Student(name) {
+		this.name;
+	}
+	//객체 생성
+	let student =new Student('홍길동');
+	
+	//해당 객체가 어떤 함수를 통해 생성됐는지 확인할 때 instanceof 키워드를 사용.
+	//객체가 속한 클래스와 상위 클래스 체크(Java는 사용하려면 상속자가 뭔지 알아야됨.)
+	document.write(student instanceof Student);//true
+	document.write('<br>');
+	document.write(student instanceof Object);//ture
+	document.write('<br>');
+	document.write(student instanceof Number);//false
+	document.write('<br>');
+</script>
+</body>
+</html>

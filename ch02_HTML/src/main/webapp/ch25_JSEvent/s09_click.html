@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>click</title>
+<script type="text/javascript">
+	window.onload=function(){
+		//div
+		const notice = document.getElementById('yumu');
+		//input 태그가 저장된 배열
+		let radios = document.getElementsByTagName('input');
+		for(let i=0;i<radios.length;i++){
+			//이벤트 연결
+			radios[i].onclick=function(){
+				if(radios[0].checked){//무료선택
+					//첫 번째 radio button 선택
+					//div숨기기
+					notice.style.display ='none';
+				}else{//유료선택
+					//두 번째 radio button 선택
+					//div노출
+					notice.style.display = '';
+				}
+			};
+		}
+	};
+</script>
+</head>
+<body>
+<form>
+	<input type="radio" name="price" checked value="0">무료
+	<input type="radio" name="price" value="1">유료
+</form>
+<div id="yumu" style="display:none;">
+	유료회원 가입비는 10,000원
+</div>
+</body>
+</html>

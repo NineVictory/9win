@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>입력 양식 필터 선택자</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+/* 
+입력 양식 필터 선택자1
+선택자 형태				설명
+요소:button			input 태그 중 type 속성이 button
+요소:checkbox			input 태그 중 type 속성이 checkbox
+요소:file 			input 태그 중 type 속성이 file
+요소:image 			input 태그 중 type 속성이 image
+요소:password			input 태그 중 type 속성이 password
+요소:radio			input 태그 중 type 속성이 radio
+요소:reset			input 태그 중 type 속성이 reset
+요소:submit			input 태그 중 type 속성이 submit
+요소:text		   		input 태그 중 type 속성이 text
+*/
+
+//문서가 준비 완료되면 매개변수로 전달된 함수를 실행
+$(document).ready(function(){
+		$('input:text').val('input:text');
+		$('input:password').css('background','pink');
+		$('input:button').val('input:button');
+		
+});
+</script>
+</head>
+<body>
+	<input type="text">
+	<input type="password">
+	<input type="button">
+	
+</body>
+</html>

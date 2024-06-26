@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>실습</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/* 
+		 [실습]
+		 정수를 prompt로 5번 입력받아서 배열에 저장하고 저장된 데이터 중 
+		 최대값과 최소값을 구해서 출력하시오.
+		 */
+
+		const array = [];
+
+		for (let i = 1; i <= 5; i++) {
+			array.push(prompt(i+'번 배열을 입력하시오:',''));
+		}
+		
+
+		array.sort(function(left, right) { //함수게 매개변수도 sort가 주고 리턴값도 sort가 받는다.
+			return left - right;
+		});//오름차순 정렬
+
+		const new_array = array.filter(function(element, index, array) {
+			//조건
+			return index < 1;
+		});
+		document.write('최솟값:' + new_array + '<br>');
+		const new_array2 = array.filter(function(element, index, array) {
+			//조건
+			return index >= 4;
+		});
+		document.write('최댓값:' + new_array2 + '<br>');
+	</script>
+</body>
+</html>

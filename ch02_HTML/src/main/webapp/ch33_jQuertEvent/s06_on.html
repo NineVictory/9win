@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>on메서드를 이용한 이벤트 연결</title>
+<style type="text/css">
+div{
+	margin:5px;
+	padding:3px;
+	border-width:3px;
+	border-style:solid;
+	border-color:black;
+	border-radius:10px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js">
+</script>
+<script type="text/javascript">
+$(function(){
+	//이벤트 연결
+	$('div').on('click',function(){
+					//하위태그,이벤트가 발생한 태그
+		let header = $('h1',this).text();
+		let paragraph =$('p',this).text();
+		alert(header +'\n' + paragraph);
+	});
+});
+</script>
+</head>
+<body>
+	<div>
+		<h1>Header1</h1>
+		<p>paragraph1</p>
+	</div>
+	<div>
+		<h1>Header2</h1>
+		<p>paragraph2</p>
+	</div>
+	<div>
+		<h1>Header3</h1>
+		<p>paragraph3</p>
+	</div>
+</body>
+</html>

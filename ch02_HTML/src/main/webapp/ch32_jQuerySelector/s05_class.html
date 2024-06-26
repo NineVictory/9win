@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>클래스 선택자 이용</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.item').css('color','orange');
+	$('h1.item').css('background-color','red');
+	//두 개의 클래스를 모두 가지는 태그 선택
+	$('h1.item.select').css('background','blue');//이걸 안쓰면 배경색은 red이다.
+});
+</script>
+</head>
+<body>
+	<h1 class = "item">Header-0</h1>
+	<h2 class = "item">Header-1</h2>
+	<h1 class = "item select">Header-2</h1>
+	<h1 class = "item">Header-3</h1>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>gallery</title>
+<style type="text/css">
+	*{
+		margin:0;
+		padding:0;
+	}
+	#galleryWrap{
+	width:520px;
+	margin:0 auto;
+	text-align:center;
+	}
+	#galleryWrap img{
+		vertical-align:middle;
+	}
+	img#prev, img#next{
+		cursor:pointer; 
+	}
+</style>
+<script type="text/javascript">
+	window.onload = function(){
+		let num = 1;
+		let gallery = document.getElementById('gallery');
+		//이벤트 연결
+		document.getElementById('prev').onclick=function(){
+			num--;
+			if(num<1)
+				num=7;
+			gallery.src ='../files/img'+num+'.jpg';
+		};
+		document.getElementById('next').onclick = function(){
+			num++;
+			if(num>7) 
+				num =1; // 이미지가 7번을 넘어서면 다시 이미지 1번으로 돌아가게함.  
+			gallery.src ='../files/img'+num+'.jpg';
+		};
+	};
+</script>
+</head>
+<body>
+<div id = "galleryWrap">
+	<h1>이미지 넘기기</h1>
+	<P>
+		<img src="../files/left_btn.png" alt ="이전 그림 보기" id="prev">
+		<img src="../files/img1.jpg" alt ="갤러리 그림" id="gallery">
+		<img src="../files/right_btn.png" alt="다음그림보기" id="next">
+	</P>
+</div>
+</body>
+</html>

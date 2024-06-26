@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>submit</title>
+<script type="text/javascript">
+	window.onload = function(){
+		const form = document.getElementById('register_form');
+		//이벤트 연결
+		form.onsubmit = function(){
+			const name = document.getElementById('name');
+			if(name.value.trim()==''){
+				alert('이름을 입력하세요!');
+				name.value = '';//공백이 있을 경우 공백 제거
+				name.focus();
+				return false;
+			}
+			const id = document.getElementById('id');
+			if(id.value.trim()==''){
+				alert('아이디를 입력하세요!');
+				id.value = '';//공백이 있을 경우 공백 제거
+				id.focus();
+				return false;
+			}
+			const password = document.getElementById('password');
+			if(password.value.trim()==''){
+				alert('비밀번호를 입력하세요!');
+				password.value = '';//공백이 있을 경우 공백 제거
+				password.focus();
+				return false;
+			}
+			const zipcode = document.getElementById('zipcode');
+			if(zipcode.value.trim()=='' || zipcode.value.length!=5){
+				alert('우편번호는 5자리를 꼭 입력하세요!');
+				zipcode.value='';
+				zipcode.focus();
+				return false;
+			}
+		};
+	};
+</script>
+</head>
+<body>
+<form id="register_form" action="a.jsp" method="post">
+	<fieldset>
+		<legend>회원가입</legend>
+		<ul>
+			<li>
+				<label for="name">이름</label>
+				<input type="text" name="name" id="name"
+					size="10" maxlength="10">
+			</li>
+			<li>
+				<label for="id">아이디</label>
+				<input type="text" name="id" id="id"
+					size="10" maxlength="10">
+			</li>
+			<li>
+				<label for="password">비밀번호</label>
+				<input type="password" name="password" id="password"
+					size="10" maxlength="10">
+			</li>
+			<li>
+				<label for="zipcode">우편번호</label>
+				<input type="text" name="zipcode" id="zipcode"
+					size="5" maxlength="5">
+			</li>
+		</ul>
+		<div align="center">
+			<input type ="submit" value="전송">
+		</div>
+	</fieldset>
+</form>
+</body>
+</html>

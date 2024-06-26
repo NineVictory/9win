@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>후손 선택자</title>
+<style type="text/css">
+/* 지정한 후손 태그와 일치하는 모든 태그를 선택함. */
+body div {border:3px solid blue;} /* body와 div사이는 공백이 있어야됨.px는 선의 두께, solid는 실선 */
+</style>
+</head>
+<body>
+	<div><!-- 선택자 적용 -->
+		<ul>
+			<li>사과</li>
+			<li>바나나</li>
+			<li>귤</li>
+			<li>망고</li>
+			<li>포도</li>
+		</ul>
+		<div>하늘</div><!-- 선택자 적용 -->
+	</div>
+	<p>
+		<span>하하</span>
+	</p>
+</body>
+</html>

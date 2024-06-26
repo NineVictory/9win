@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>문서 객체의 속성처리</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//3초 후에 매개변수로 전달된 함수를 실행
+	setTimeout(function(){
+		let src = $('img').attr('src'); // src 속성값을 반환
+		alert('src');
+	},3000);
+});
+</script>
+</head>
+<body>
+	<img src="../files/Penguins.jpg">
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>배열 요소의 정렬</title>
+</head>
+<body>
+<script type="text/javascript">
+	const array = ['가','하','아','나'];
+	//배열요소의 목록
+	document.write(array + '<br>');
+	
+	array.sort();//오름차순 정렬
+	document.write(array+'<br>');
+	
+	array.reverse();//반대로 정렬
+	document.write(array+'<br>');
+	document.write('---------------------------<br>');
+	
+	const array2 =[52,273,103,32];
+	document.write(array2+'<br>');
+	array2.sort(function(left,right){ //함수게 매개변수도 sort가 주고 리턴값도 sort가 받는다.
+		return left-right;
+	});//오름차순 정렬
+	document.write(array2+'<br>');
+	
+	array2.sort(function(left,right){
+		return right-left;
+	});//내림차순 정렬
+	document.write(array2+'<br>');
+</script>
+</body>
+</html>
+
+
+
+
+

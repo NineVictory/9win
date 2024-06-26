@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>자바스크립트의 자료형</title>
+</head>
+<body>
+<script type="text/javascript">
+/*
+자바스크립트의 자료형
+숫자형 : 숫자(정수,실수)를 표현하는 자료형
+문자형 : 작은따옴표 '' 또는 큰따옴표 "" 를 양 끝에 두고, 그 안에 한 글자 이상의
+       문자,기호 또는 숫자가 있는 자료형을 문자형이라고 함
+불린형 : 참(true),거짓(false) 
+null : 값이 없다는 의미
+undefined : 존재하지 않는 값을 의미
+심볼형 : 심볼 자료형은 ES6부터 추가된 원시 자료형. 다른 원시형과 다르게 유일하게
+       변경 불가능한 자료형
+ */
+	//변수 선언 및 초기화
+	var numberVar = 273;//숫자
+	var stringVar = '서울';//문자(열)
+	var booleanVar = true;//boolean
+	/*
+	null은 비어 있는, 존재하지 않는 값을 의미함. 원시 자료형 null로 분류됨
+	단 typeof로 자료형을 확인할 때 object 를 반환하는데, 이는 자바스크립트
+	기존 이슈로 인한 결과임. 이를 통해 null이 객체형이라 오해하지 않도록 주의
+	*/
+	var nullVar = null;//object
+	var undefinedVar;//undefined
+	var sym = Symbol('me');//symbol
+	
+	//typeof 변수명 : 해당 변수에 저장된 데이터의 타입을 알아내는 연산자
+	document.write('numberVar : ' + typeof numberVar + '<br>');
+	document.write('stringVar : ' + typeof stringVar + '<br>');
+	document.write('booleanVar : ' + typeof booleanVar + '<br>');
+	document.write('nullVar : ' + typeof nullVar + '<br>');
+	document.write('undefinedVar : ' + typeof undefinedVar + '<br>');
+	document.write('sym : ' + typeof sym + '<br>');
+	
+	var functionVar = function(){};//함수
+	var objectVar = {}; //객체
+	var arrayVar = []; //배열
+	
+	document.write('functionVar : ' + typeof functionVar + '<br>');
+	document.write('objectVar : ' + typeof objectVar + '<br>');
+	document.write('arrayVar : ' + typeof arrayVar);
+</script>
+</body>
+</html>
+
+
+
+

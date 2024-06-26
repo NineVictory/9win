@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>문서 객체의 속성 처리</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//하나의 속성 제어
+	/* $('img').attr('width',function(index){
+		return (index+1)*100;
+	}); */
+	
+	//복수의 속성 제어
+	/* $('img').attr('width',function(index){
+		return (index+1)*100;
+	}).attr('height',function(index){
+		return (index+1)*100;
+	}); */
+	
+	//제일 권장하는 방법(객체형태로 만드는 방법)
+	$('img').attr({
+		width:function(index){
+			return (index+1)*100;
+		},
+		height:function(index){
+			return (index+1)*100;
+		}
+	});
+});
+</script>
+</head>
+<body>
+	<img src="../files/Desert.jpg">
+	<img src="../files/Koala.jpg">
+	<img src="../files/Penguins.jpg">
+</body>
+</html>

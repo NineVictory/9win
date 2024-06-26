@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>객체 생성</title>
+</head>
+<body>
+<script type="text/javascript">
+	//객체 생성
+	const product= {
+			//속성(key(프로퍼티):value)
+			//키는 ''사용X. 원래는 영어로 써줘야좋음
+			제품명:'캐스피',
+			제품번호:'A1001',
+			기능:'Hi Speed',
+			원산지:'대한민국',
+			가격:1000,
+			업데이트지원:true
+	};
+	//객체의 속성 호출
+	
+	document.write(product.제품명);
+	document.write('<br>');
+	document.write(product.가격);
+	document.write('<br>');
+	document.write(product['업데이트지원']);
+	document.write('<br>');
+	document.write(product['기능']);
+	
+	document.write('<br>--------------------------------<br>');
+	
+	const country = {
+			//공백이나 특수문자를 넣기위해서는 ''를 쓴다. 추천하는 방법은 아님.
+			'행정 수도':'서울',
+			'인구수~':10000
+	};
+	//document.write(country.행정 수도); //공백 때문에 인정X
+	document.write(country['행정 수도']);
+	document.write('<br>');
+	//document.write(country.인구수~);//특수문자 때문에 인정X
+	document.write(country['인구수~']);
+	document.write('<br>');
+</script>
+</body>
+</html>

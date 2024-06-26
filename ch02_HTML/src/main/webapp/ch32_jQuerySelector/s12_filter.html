@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>기본 필터 선택자</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+/* 
+기본 필터 선택자
+선택자 형태			설명
+요소:odd			홀수 번째에 위치한 문서 객체를 선택
+요소:even			짝수 번째에 위치한 문서 객체를 선택
+요소:first		첫 번째 위치한 문서 객체를 선택
+요소:last			마지막에 위치한 문서 객체를 선택
+*/
+$(document).ready(function(){
+	$('tr:odd').css('background','yellow');
+	$('tr:even').css('background','pink');
+	
+	/* $('tr:first').css('background','#000000');
+	$('tr:first').css('color','#FFFFFF'); */
+	
+	//위에를 한번에 명시하는법
+	//			.css부터 	#000000까지 자기자신 객체를 반환하기 때문에 이어서 명시가 가능하다.
+	$('tr:first').css('background','#000000').css('color','#FFFFFF');
+});
+</script>
+</head>
+<body>
+<table>
+	<tr>
+		<th>이름</th><th>혈액형</th><th>지역</th>
+	</tr>
+	<tr>
+		<td>강민수</td><td>AB형</td><td>서울</td>
+	</tr>
+	<tr>
+		<td>홍길동</td><td>O형</td><td>부산</td>
+	</tr>
+	<tr>
+		<td>박문수</td><td>A형</td><td>인천</td>
+	</tr>
+	<tr>
+		<td>장영실</td><td>B형</td><td>서울</td>
+	</tr>
+	<tr>
+		<td>이순신</td><td>AB형</td><td>제주</td>
+	</tr>
+	<tr>
+		<td>김유신</td><td>O형</td><td>강원</td>
+	</tr>
+</table>
+</body>
+</html>

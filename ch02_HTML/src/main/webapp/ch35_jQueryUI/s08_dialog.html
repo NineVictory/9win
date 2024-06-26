@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>datepicker</title>
+<link rel="stylesheet" href="../css/jquery-ui.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js">
+</script>
+<script type="text/javascript" src="../js/jquery-ui.min.js">
+</script>
+<script type="text/javascript">
+$(function(){
+	$('#dialog').dialog({
+		resizable:false,
+		height:200,
+		modal:true, //다이알로그창이 보여질 때 부모 영역을 선택할 수 없음
+		buttons:{
+			'Delete all itees':function(){
+				$(this).dialog('close');
+			},
+			Cancel:function(){
+				$(this).dialog('close');
+			}
+		}
+	});
+	
+	
+});
+</script>
+</head>
+<body>
+	<div id="dialog" title="Basic dialog">
+		<p>다이얼로그는 움직일 수 있으며 다이얼로그 창은 x버튼을 누르면 닫을 수도 있음</p>
+	</div>
+	<div>welcome</div>
+</body>
+</html>
