@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>글상세</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+</head>
+<body>
+<div class="page-main">
+	<h2 th:text="${board.title}"></h2>
+	<p>
+		<!-- 1,2번 방법중 어떤것을 써도 상관없음 -->
+		<span th:text="'글번호 :' + ${board.num}"></span><br><!-- 1번 방법 -->
+		<span>작성자 : [[${board.writer}]]</span><br><!-- 2번 방법 -->
+		<span>작성일 : [[${board.reg_date}]]</span>
+	</p>
+	<hr width="100%" size="1" noshade="noshade">
+	<p th:text="${board.content}"></p>
+	<div class="align-center">
+		<!-- th:onclick 을 쓸 떄는 ""안에 | 를 맨끝에 써줘야됨. 자바스크립트를 쓰기 위해 파이프(|)를 씀 -->				
+		<input type="button" value="수정" th:onclick="|location.href='@{update.do(num=${board.num})}'|">
+		<input type="button" value="삭제" th:onclick="|location.href='@{delete.do(num=${board.num})}'|">
+		<input type="button" value="목록" onclick="location.href='list.do'">	
+	</div>
+</div>
+</body>
+</html>

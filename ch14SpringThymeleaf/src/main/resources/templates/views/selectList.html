@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="~{layouts/basicLayout}">
+<head>
+<meta charset="UTF-8">
+<title>목록</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" type="text/css"> <!-- th: 를 쓰면 thymeleaf의 속성으로 적용. -->
+</head>
+<body>
+<!-- layout:fragment="content" 이부분이 basicLayout.html에 있는 부분과 연결되어서 화면에 나온다. -->
+<div layout:fragment="content" class="page-main">
+	<h2>게시판 목록</h2>
+	<div class="align-right">
+		<input type="button" value="글쓰기" onclick="location.href='insert.do'">
+	</div>
+	
+	<!-- thymeleaf는 태그를 쓰지않고 속성을 쓴다고 생각하면된다. thymeleaf는 HTML하나만으로 view를 구현함. -->
+	<!-- 기존의 <c:if>대신 th:if를 사용. 만약 false이면(0이 아니면) 이 div가 나오지않음 -->
+	<div class="result-display" th:if="${count == 0}">표시할 내용이 없습니다.</div>
+	<div th:if="${count > 0}">
+	<table>
+		<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>작성일</th>
+		</tr>
+		<tr th:each="board : ${list}">
+			<!-- <td th:text="${board.num}"></td> -->
+			<td>[[${board.num}]]</td>
+			<!-- @{detail.do?num=${board.num}}에서 detail앞에 /를 넣으면 url형태이다. 안쓰면 파일형태 -->
+			<!-- ? 대신에 ()소괄호로 감싸줘야된다. -->
+			<td><a th:href="@{detail.do(num=${board.num})}" th:text="${board.title}"></a></td>
+			<td th:text="${board.writer}"></td>
+			<td th:text="${board.reg_date}"></td>
+		</tr>
+	</table>
+	<div class="align-center" th:utext="${page}"></div>
+	</div>
+</div>
+</body>
+</html>
