@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="kr.spring.member.dao.MemberMapper"> 
+	 <!-- 회원가입 -->
+	 <insert id="insertMember_detail" parameterType="memberVO">
+	 	INSERT INTO spmember_detail (
+	 	  mem_num,
+	 	  name,
+	 	  passwd,
+	 	  phone,
+	 	  email,
+	 	  zipcode,
+	 	  address1,
+	 	  address2)	
+	 	VALUES (
+	 	  #{mem_num},
+	 	  #{name},
+	 	  #{passwd},
+	 	  #{phone},
+	 	  #{email},
+	 	  #{zipcode},
+	 	  #{address1},
+	 	  #{address2}
+	 	)
+	 </insert>
+	 <!-- 아이디 중복체크 및 로그인 처리-->
+	 <select id="selectCheckMember" parameterType="string" resultType="memberVO" >
+	 	SELECT 
+	 		mem_num,
+	 		id,
+	 		auth,
+	 		nick_name,
+	 		au_id,
+	 		passwd,
+	 		email
+	 	FROM spmember LEFT OUTER JOIN spmember_detail
+	 	USING (mem_num)
+	 	WHERE id=#{id}
+	 </select>
+	 <!-- 회원정보 수정 -->
+	 <update id="updateMember_detail" parameterType="memberVO"> <!-- void기 떄문에 resultType 없음 -->
+	 UPDATE spmember_detail
+	 SET
+	 	name=#{name},
+	 	phone=#{phone},
+	 	email=#{email},
+	 	zipcode=#{zipcode},
+	 	address1=#{address1},
+	 	address2=#{address2},
+	 	modify_date=SYSDATE
+	 WHERE mem_num=#{mem_num}
+	 </update>
+ </mapper>
+
+
+
+
+
+
+
