@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+ 
+	<!-- @Autowired,@Resource, @Qualifier 사용시 아래 설정 추가 -->
+	<context:annotation-config /><!-- @Autowired를 쓰러면 이 태그가 필수로 사용된다. -->
+	
+	<!-- @Autowired 어노테이션을 이용한 의존관계 자동 설정 -->
+	<bean id="monitor" class="kr.spring.ch16.SystemMonitor">
+		<property name="periodTime">
+			<value>70</value>
+		</property>
+	</bean>
+	<bean id="sender" class="kr.spring.ch16.SmsSender"/>
+<!--==============================================================================================================-->			
+	<!-- @Qualifier 어노테이션을 이용한 자동 설정 제한 -->
+	<bean id="systemMonitor" class="kr.spring.ch17.SystemMonitor2"/>
+	<bean id="recorder1" class="kr.spring.ch17.Recorder">
+		<qualifier value= "main"/>	
+	</bean>
+	<bean id="recorder12" class="kr.spring.ch17.Recorder"/>
+<!--==============================================================================================================-->	
+	<!-- @Resourse 어노테이션을 이용한 자동 설정
+		 (빈 객체의 이름과 프로퍼티명이 일치하면 의존관계 설정) -->
+	<bean id="homeController" class="kr.spring.ch18.HomeController"/>
+	<bean id="camera1" class="kr.spring.ch18.Camera" p:number="1"/> <!-- id를 camera1으로 해뒀기 떄문에  HomeController의 프로터피와 자동으로 매핑이된다.-->
+	<bean id="camera2" class="kr.spring.ch18.Camera" p:number="2"/>
+	<bean id="cameraz" class="kr.spring.ch18.Camera" p:number="3"/>
+</beans>
+
+
+
+
+
+
+
