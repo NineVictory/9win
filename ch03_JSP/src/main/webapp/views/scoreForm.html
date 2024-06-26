@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>[실습]성적 처리</title>
+<script type="text/javascript">
+window.onload=function(){
+	const myform = document.getElementById("myForm");
+	myform.onsubmit = function(){
+		//반복문을 이용한 유효성 체크
+		const items = document.querySelectorAll('input[type="text"]');
+		
+		for(let i=0; i<items.length;i++){
+			//입력을 하지 않았거나 공백 입력한 경우
+			if(items[i].value.trim()==''){
+				const label = document.querySelector('label[for="'+items[i].id+'"]');
+				const label_text = label.textContent;
+				alert(label_text + ' 항목은 필수 입력');
+				items[i].value = '';
+				items[i].focus();
+				return false;
+			}
+			//문자인지 숫자인지 입력
+			if(isNaN(items[i].value)){
+				alert('성적은 숫자만 가능');
+				items[i].value = '';
+				items[i].focus();
+				return false;
+			}
+			//0~100 값만 인정
+			if(items[i].value <0 ||items[i].value>100){
+				alert('0부터 100까지만 입력가능');
+				items[i].value = '';
+				items[i].focus();
+				return false;
+			}
+		}
+	};
+};
+</script>
+</head>
+<body>
+<form id="myForm" action="/ch03_JSP/score" method="post">
+	<ul>
+		<li>
+			<label for ="korean">국어</label>
+			<input type="text" name="korean" id="korean">
+		</li>
+		<li>
+			<label for ="english">영어</label>
+			<input type="text" name="english" id="english">
+		</li>
+		<li>
+			<label for ="math">수학</label>
+			<input type="text" name="math" id="math">
+		</li>
+	</ul>
+	<input type="submit" value="전송">
+</form>
+</body>
+</html>
