@@ -20,11 +20,19 @@
 	</ul>
 	<ul>
 		<li><input type="button" class="menu-btn" value="비밀번호변경"
-			onclick="changePassword">
+			onclick="location.href='changePassword'">
 		</li>
 		<li><input type="button" class="menu-btn" value="회원탈퇴"
-			onclick="delete">
+			onclick="location.href='delete'">
 		</li>
 	</ul>
 </div>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/member.profile.js"></script>
 <!-- MyPage 메뉴 끝 -->	
+
+
+
+
+
+

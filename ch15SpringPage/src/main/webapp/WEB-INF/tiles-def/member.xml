@@ -24,6 +24,15 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/memberView.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
 	</definition>
+	<definition name="memberModify" extends="myPage">
+		<put-attribute name="title" value="회원정보수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberModify.jsp"/>
+	</definition>
+	<definition name="memberChangePassword" extends="myPage">
+		<put-attribute name="title" value="비밀번호 변경"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberChangePassword.jsp"/>
+	</definition>
+	
 </tiles-definitions>
 
 

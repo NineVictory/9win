@@ -6,6 +6,7 @@
 <div class="align-right">
 	<c:if test="${!empty user}">
 	<a href="${pageContext.request.contextPath}/member/myPage">마이페이지</a>
+	<img src="${pageContext.request.contextPath}/member/photoView" width="25" height="25" class="my-photo">
 	<a href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
 	</c:if>
 	<c:if test="${empty user}">
