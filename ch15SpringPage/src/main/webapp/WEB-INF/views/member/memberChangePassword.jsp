@@ -13,7 +13,7 @@
                 <form:errors path="now_passwd" cssClass="error-color"/>
             </li>
             <li>
-                <form:label path="passwd">비밀번호</form:label>
+                <form:label path="passwd">새비밀번호</form:label>
                 <form:password path="passwd"/>
                 <form:errors path="passwd" cssClass="error-color"/>
             </li>
@@ -21,7 +21,7 @@
                 <!-- 자바빈에 없기 때문에 기본 태그를 사용해야됨. 비밀번호와 같은지 확인용도. JavaScript로 확인 -->
                 <label for="confirm_passwd">새비밀번호 확인</label>
                 <input type="password" id="confirm_passwd">
-                <span id="message_password"></span>
+                <span id="message_password"></span>	
             </li>
             <li>
                 <div id="captcha_div">
@@ -59,5 +59,7 @@
             <input type="button" value="MY페이지" onclick="location.href='myPage'">
         </div>
     </form:form>
+    <!-- nav_mypage.jsp에 jquery-3.7.1.min은 이미 호출되어있어서 여기서 호출안해도됨 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/member.password.js"></script>
 </div>
 <!-- 비밀번호 변경 끝 -->

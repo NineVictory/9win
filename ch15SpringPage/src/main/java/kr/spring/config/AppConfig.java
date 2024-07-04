@@ -8,13 +8,14 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
+import kr.spring.interceptor.WriterCheckInterceptor;
 import kr.spring.interceptor.loginCheckInterceptor;
 
 //자바코드 기반 설정 클래스
 @Configuration
 public class AppConfig implements WebMvcConfigurer{
 	private loginCheckInterceptor loginCheck;
-	
+	private WriterCheckInterceptor writerCheck;
 	
 	@Bean
 	public loginCheckInterceptor interceptor2() {
@@ -22,12 +23,25 @@ public class AppConfig implements WebMvcConfigurer{
 		return loginCheck;
 	}  
 	
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		//LoginCheckInterceptor 설정 
-		registry.addInterceptor(loginCheck).addPathPatterns("/member/myPage")
-											.addPathPatterns("/member/update");
-		
+	@Bean
+	public WriterCheckInterceptor interceptor4() {
+		writerCheck = new WriterCheckInterceptor();
+		return writerCheck;
+	}
+	
+		@Override
+		public void addInterceptors(InterceptorRegistry registry) {
+			//LoginCheckInterceptor 설정 
+			registry.addInterceptor(loginCheck).addPathPatterns("/member/myPage")
+												.addPathPatterns("/member/update")
+												.addPathPatterns("/member/changePassword")
+												.addPathPatterns("/member/delete")
+												.addPathPatterns("/board/write")
+												.addPathPatterns("/board/update")
+												.addPathPatterns("/board/delete");
+			//WriterCheckInterceptor 설정
+			registry.addInterceptor(writerCheck).addPathPatterns("/board/update")
+												.addPathPatterns("/board/delete");
 	}
 	
 	@Bean
@@ -37,7 +51,8 @@ public class AppConfig implements WebMvcConfigurer{
 		//XML 설정 파일 경로 지정
 		configurer.setDefinitions(new String[] {
 				"/WEB-INF/tiles-def/main.xml",
-				"/WEB-INF/tiles-def/member.xml"
+				"/WEB-INF/tiles-def/member.xml",
+				"/WEB-INF/tiles-def/board.xml"
 		});
 		configurer.setCheckRefresh(true);
 		return configurer; 
