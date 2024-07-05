@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.board.service.BoardService;
 import kr.spring.board.vo.BoardFavVO;
+import kr.spring.board.vo.BoardReFavVO;
 import kr.spring.board.vo.BoardReplyVO;
 import kr.spring.board.vo.BoardVO;
 import kr.spring.member.vo.MemberVO;
@@ -192,6 +193,100 @@ public class BoardAjaxController {
 		
 		return mapJson;
 	}
+	/*===================
+	댓글 수정
+	===================*/
+	@PostMapping("/board/updateReply")
+	@ResponseBody
+	public Map<String,String> modifyReply(
+									BoardReplyVO boardReplyVO,
+									HttpSession session,
+									HttpServletRequest request){
+		log.debug("<<댓글 수정>> :"+boardReplyVO);
+		
+		Map<String,String> mapJson = new HashMap<String, String>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user"); //로그인을 했는지 확인하기위해 (회원제 서비스이기 떄문에)
+		BoardReplyVO db_reply = boardService.selectReply(boardReplyVO.getRe_num());
+		
+		if(user == null) {
+			//로그인이 되지 않은 경우
+			mapJson.put("result","logout");
+		}else if(user !=null 
+				&& user.getMem_num()==db_reply.getMem_num()) {
+			//로그인 회원번호와 작성자 회원번호 일치
+			
+			//ip저장
+			boardReplyVO.setRe_ip(request.getRemoteAddr());
+			//댓글 수정
+			boardService.updateReply(boardReplyVO);
+			mapJson.put("result","success");
+		}else {
+			//로그인 회원번호와 작성자 회원번호 불일치
+			mapJson.put("result","wrongAccess");
+		}
+
+		return mapJson;
+	}
+	/*===================
+	댓글 삭제
+	===================*/
+	@PostMapping("/board/deleteReply")
+	@ResponseBody
+	public Map<String,String> deleteReply(long re_num,
+											HttpSession session){
+		log.debug("<<댓글 삭제 - re_num>>:"+ re_num);
+		
+		Map<String,String> mapJson = new HashMap<String, String>();
+		MemberVO user = (MemberVO)session.getAttribute("user"); //로그인을 했는지 확인하기위해 (회원제 서비스이기 떄문에)
+		BoardReplyVO db_reply = boardService.selectReply(re_num);
+		
+		if(user == null) {
+			//로그인이 되지 않은 경우
+			mapJson.put("result","logout");
+		}else if(user !=null 
+				&& user.getMem_num()==db_reply.getMem_num()) {
+			//로그인 회원번호와 작성자 회원번호 일치	
+			boardService.deleteReply(re_num);
+			mapJson.put("result","success");
+		}else {
+			//로그인 회원번호와 작성자 회원번호 불일치
+			mapJson.put("result","wrongAccess");
+		}
+		
+		return mapJson;
+	}
+	/*===================
+	댓글 좋아요 읽기
+	===================*/
+	@GetMapping("/board/getReFav")
+	@ResponseBody
+	public Map<String,Object> getReFav(
+								BoardReFavVO fav,
+								HttpSession session){
+		log.debug("<<댓글 좋아요>>:" +fav);
+		
+		Map<String,Object> mapJson = new HashMap<String, Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user"); //로그인을 했는지 확인하기위해 (회원제 서비스이기 떄문에)
+		if(user == null) {
+			mapJson.put("result","success");
+			mapJson.put("result","noFav");
+		}else {
+			fav.setMem_num(user.getMem_num());
+			BoardReFavVO boardReFav = boardService.selecReFav(fav);
+			if(boardReFav!=null) {
+				mapJson.put("result","success");
+				mapJson.put("result","yesFav");
+			}else {
+				mapJson.put("result","success");
+				mapJson.put("result","noFav");
+			}
+		}
+		mapJson.put("count",boardService.selectReFavCount(fav.getRe_num()));
+		return mapJson;
+	}
+	
 }
 
 

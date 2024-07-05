@@ -31,7 +31,7 @@ $(function(){
 				}
 				
 				//댓글 수 읽어오기
-				displayReplyCount(param);
+				displayReplyCount(param.count);
 				
 				//댓글 목록 작업
 				$(param.list).each(function(index,item){
@@ -98,6 +98,12 @@ $(function(){
 			}
 		});
 	}
+	//다음 댓글 보기 버튼 클릭시 데이터 추가
+	$('.paging-button input').click(function(){
+		selectList(currentPage + 1);
+		
+	});
+	
 	/*===================
 		댓글 등록
 	===================*/
@@ -149,6 +155,102 @@ $(function(){
 	/*===================
 		댓글 수정
 	===================*/
+	//댓글 수정 버튼 클릭시 수정폼 노출
+	$(document).on('click','.modify-btn',function(){
+		//댓글번호
+		let re_num = $(this).attr('data-num');
+		//댓글 내용
+		let re_content = $(this).parent()
+							 .find('p')
+							 .html()
+							 .replace(/<br>/gi,'\r\n') /*부모태그에 p태그를 찾아서 바꾼다.*/
+							 /*g: 지정문자열 모두, i: 대소문자 무시 => 즉 대소문자 상관없이 모든 문자열 모두를 줄바꿈해라.*/
+		//댓글 수정폼 UI
+		let modifyUI = '<form id="mre_form">';
+		modifyUI += '<input type="hidden" name="re_num" id="re_num" value="'+re_num+'">';
+		modifyUI += '<textarea rows="3" cols="50" name="re_content" id="mre_content" class="rep-content">'+re_content+'</textarea>';
+		modifyUI += '<div id="mre_first"><span class="letter-count">300/300</span></div>';
+		modifyUI += '<div id="mre_second" class="align-right">';
+		modifyUI += ' <input type="submit" value="수정">';
+		modifyUI += ' <input type="button" value="취소" class="re-reset">';
+		modifyUI += '</div>';
+		modifyUI += '<hr size="1" noshade width="96%">';
+		modifyUI += '</form>';
+		
+		//답글이 있는 경우 답글을 초기화
+		
+		//답글이 있는 경우 답글을 초기화
+		
+		//이전에 이미 수정하는 댓글이 있을 경우 수정 버튼을 클릭하면
+		//숨김 sub-item를 환원시키고 수정폼을 초기화함
+		initModifyForm();
+		//지금 클릭해서 수정하고자 하는 데이터는 감추기
+		//(수정 버튼을 감싸고있는 div)
+		$(this).parent().hide(); //삭제가 아닌 감추기 (부모쪽에서 찾은다음 숨기기)
+		
+		//수정폼을 수정하고자 하는 데이터가 있는 div에 노출
+		$(this).parents('.item').append(modifyUI); //parent는 직계부모. parents는 뒤에 이름을 지정해서 여러부모중 한 부모를 찾는것.
+		
+		//입력한 글자수 셋팅
+		let inputLength = $('#mre_content').val().length;
+		let remain = 300 - inputLength;
+		remain += '/300';
+		
+		//문서 객체에 반영
+		$('#mre_first .letter-count').text(remain);
+	});	
+	//수정폼에서 취소 버튼 클릭시 수정폼 초기화
+	$(document).on('click','.re-reset',function(){
+		initModifyForm();
+	});
+	//댓글 수정폼 초기화
+	function initModifyForm(){
+		$('.sub-item').show();
+		$('#mre_form').remove();
+	}
+	
+	//댓글 수정
+	$(document).on('submit','#mre_form',function(event){
+		if($('#mre_content').val().trim()==''){ //수정폼의 내용이 없을경우
+			alert('내용을 입력하세요!');
+			$('#mre_content').val().focus();
+			return false;
+		}
+		//폼에 입력한 데이터 반환
+		let form_data = $(this).serialize();
+		//서버와 통신
+		$.ajax({
+			url:'updateReply',
+			type:'post',
+			data:form_data,
+			dataType:'json',
+			success:function(param){
+				if(param.result =='logout'){
+					alert('로그인해야 수정할 수 있습니다.');
+				}else if(param.result == 'success'){
+					$('#mre_form').parent().find('p').html($('#mre_content').val().replace(/</g,'&lt;')
+																				  .replace(/>/g,'&gt;')
+																				  .replace(/\r\n/g,'<br>')
+																				  .replace(/\r/g,'<br>')
+																				  .replace(/\n/g,'<br>'));
+																				  
+					//최근 수정일 처리			
+					$('#mre_form').parent().find('modify-date').text('최근 수정일: 5초미만');	
+					//수정폼 초기화
+					initModifyForm();													  
+				}else if(param.result =='wrongAccess'){
+					alert('타인의 글은 수정할 수 없습니다.');
+				}else{
+					alert('댓글 수정 오류 발생');
+				}
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+		});
+		//기본 이벤트 제거 (작성이 끝나면 이벤트를 없애야되니까)
+		event.preventDefault();
+	});
 	
 	/*===================
 		댓글(답글) 등록, 수정 공통
@@ -182,12 +284,47 @@ $(function(){
 	/*===================
 		댓글 삭제
 	===================*/
+							//위에서 만들었던 class=delete-btn을 클릭했을 시
+	$(document).on('click','.delete-btn',function(){
+		//댓글 번호
+		let re_num = $(this).attr('data-num');
+		//서버와 통신
+		$.ajax({
+			url:'deleteReply',
+			type:'post',
+			data:{re_num:re_num},
+			dataType:'json',
+			success:function(param){
+				if(param.result == 'logout'){
+					alert('로그인해야 삭제할 수 있습니다.');
+				}else if(param.result=='success'){
+					alert('삭제완료');
+					selectList(1); //1페이지 목록을 호출
+				}else if(param.result=='wrongAccess'){
+					alert('타인의 글을 삭제할 수 없습니다');
+				}else{
+					alert('댓글 삭제 오류 발생');
+				}
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+		});
+	});
 	
 	/*===================
 		댓글수 표시
 	===================*/
-	function displayReplyCount(param){
-		
+	function displayReplyCount(count){
+		let output;
+		if(count>0){
+			output = '댓글수('+count+')';
+		}else{
+			output = '댓글수(0)';
+			
+		}
+		//문서 객체에 추가
+		$('#output_rcount').text(output);
 	}
 	/*===================
 		댓글수 좋아요 등록
@@ -208,7 +345,8 @@ $(function(){
 	
 	/*===================
 		답글 삭제
-	===================*/
+	===================*/	
+	
 	
 	/*===================
 		초기 데이터 호출

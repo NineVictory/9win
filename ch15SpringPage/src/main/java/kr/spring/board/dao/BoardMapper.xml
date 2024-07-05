@@ -79,8 +79,20 @@
 	 			a.*,
 	 			rownum rnum
 	 		  FROM (SELECT
-	 		  		  *
+	 		  		  board_num,
+	 		  		  <![CDATA[
+	 		  		  REPLACE(REPLACE(title,'<','&lt;'),'>','&gt;') title,
+	 		  		  ]]>
+	 		  		  hit,
+	 		  		  filename,
+	 		  		  reg_date,
+	 		  		  mem_num,
+	 		  		  id,
+	 		  		  nick_name,
+	 		  		  re_cnt,
+	 		  		  fav_cnt
 	 		  		FROM spboard 
+	 		  		LEFT OUTER JOIN (SELECT COUNT (*) re_cnt, board_num FROM spboard_reply GROUP BY board_num) USING(board_num)
 	 		  		LEFT OUTER JOIN (SELECT COUNT (*) fav_cnt, board_num FROM spboard_fav GROUP BY board_num) USING(board_num) <!-- fav_cnt는 알리아스 명칭임 이 괄호는 인라인 뷰 -->
 	 		  		JOIN spmember USING(mem_num)
 	 		  		<include refid="boardSearch"></include>
