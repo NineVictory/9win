@@ -77,6 +77,23 @@ create table sqreply_fav(
  						references spmember (mem_num)						
 );
 
+--답글
+create table spboard_response(
+te_num number not null,
+te_content varchar2(900) not null,
+te_date date default sysdate not null,
+te_mdate date,
+te_parent_num number not null, --부모글의 번호가 들어감, 자식 글이 아니라 부모글인 경우 0
+te_depth number not null, --자식의 깊이, 부모글의 자식글 A 1, 자식글A의 자식글B 2, 부모글일 경우 0
+te_ip varchar2(40) not null,
+re_num number not null,
+mem_num number not null,
+constraint spboard_treply_pk primary key (te_num),
+constraint treply_reply_fk1 foreign key (re_num) references spboard_reply (re_num),
+constraint treply_spmember_fk2 foreign key (mem_num) references spmember (mem_num)
+);
+create sequence response_seq;
+
 
 
 

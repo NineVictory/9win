@@ -18,6 +18,7 @@ import kr.spring.board.service.BoardService;
 import kr.spring.board.vo.BoardFavVO;
 import kr.spring.board.vo.BoardReFavVO;
 import kr.spring.board.vo.BoardReplyVO;
+import kr.spring.board.vo.BoardResponseVO;
 import kr.spring.board.vo.BoardVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
@@ -286,7 +287,64 @@ public class BoardAjaxController {
 		mapJson.put("count",boardService.selectReFavCount(fav.getRe_num()));
 		return mapJson;
 	}
-	
+	/*===================
+	댓글 좋아요 등록/삭제
+	===================*/
+	@PostMapping("/board/writeReFav")
+	@ResponseBody
+	public Map<String,Object>writeReFav(
+								BoardReFavVO fav,
+								HttpSession session){
+		log.debug("<<댓글 좋아요 등록/삭제>>:" +fav);
+		
+		Map<String,Object> mapJson = new HashMap<String, Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user"); //로그인을 했는지 확인하기위해 (회원제 서비스이기 떄문에)
+		if(user == null) {
+			mapJson.put("result","logout");
+		}else {
+			fav.setMem_num(user.getMem_num());
+			BoardReFavVO boardReFav = boardService.selecReFav(fav);
+			if(boardReFav!=null) {
+				boardService.deleteReFav(fav);
+				mapJson.put("status","noFav");
+			}else {
+				boardService.insertReFav(fav);
+				mapJson.put("status","yesFav");
+			}
+			mapJson.put("result","success");
+			mapJson.put("count",boardService.selectReFavCount(fav.getRe_num()));
+		}
+		
+		return mapJson;
+	}
+	/*===================
+	 답글 등록
+	===================*/
+	@PostMapping("/board/writeResponse")
+	@ResponseBody
+	public Map<String,String> writeREsponse(BoardResponseVO boardResponseVO,
+											HttpSession session,
+											HttpServletRequest request){
+		log.debug("<<답글 등록>> :" + boardResponseVO);
+		
+		Map<String,String> mapJson = new HashMap<String, String>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			//로그인이 되지 않는 경우
+			mapJson.put("result","logout");
+		}else {
+			//회원번호 저장
+			boardResponseVO.setMem_num(user.getMem_num());
+			//ip 저장
+			boardResponseVO.setTe_ip(request.getRemoteAddr());
+			//답글 등록
+			boardService.insertResponse(boardResponseVO);
+			mapJson.put("result", "success");
+		}
+		return mapJson;
+	}
 }
 
 
