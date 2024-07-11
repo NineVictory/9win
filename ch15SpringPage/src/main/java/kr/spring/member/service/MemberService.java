@@ -1,5 +1,9 @@
 package kr.spring.member.service;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Select;
+
 import kr.spring.member.vo.MemberVO;
 
 public interface MemberService {
@@ -20,7 +24,9 @@ public interface MemberService {
 
 	//프로필 이미지 업데이트
 	public void updateProfile(MemberVO member);
-
+	
+	//채팅 회원 정보 검색
+	public List<MemberVO> selectSerchmember(String id);
 }
 
 

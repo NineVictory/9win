@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.concurrent.SuccessCallback;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -345,6 +346,99 @@ public class BoardAjaxController {
 		}
 		return mapJson;
 	}
+	/*===================
+	 답글 목록
+	===================*/
+	@GetMapping("/board/getListResp")
+	@ResponseBody
+	public Map<String,Object> getListResp(long re_num,
+										  HttpSession session){
+		log.debug("<<답글 목록 - re_num>> : " + re_num);
+		
+		List<BoardResponseVO> list = boardService.selectListResponse(re_num);
+		MemberVO  user = (MemberVO)session.getAttribute("user");
+		
+		Map<String,Object> mapJson = new HashMap<String, Object>();
+		mapJson.put("list",list);
+		if(user!=null) {
+			mapJson.put("user_num",user.getMem_num());
+		}
+		
+		return mapJson;
+	}
+	/*===================
+	 답글 수정
+	===================*/
+	@PostMapping("/board/updateResponse")
+	@ResponseBody
+	public Map<String,String> modifyResponse(BoardResponseVO boardResponseVO,
+											 HttpSession session,
+											 HttpServletRequest request){
+		
+		log.debug("<<답글 수정>>:"+boardResponseVO);
+		
+		Map<String,String> mapJson = new HashMap<String, String>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		BoardResponseVO db_response = boardService.selectResponse(boardResponseVO.getTe_num());
+		
+		if(user==null) {
+			//로그인이 되지 않은 경우
+			mapJson.put("result","logout");
+			
+		}else if(user!=null && user.getMem_num()==db_response.getMem_num()) {
+			//로그인 회원번호와 작성자 회원번호 일치
+			//ip 저장
+			boardResponseVO.setTe_ip(request.getRemoteAddr());
+			//답글 수정
+			boardService.updateResponse(boardResponseVO);
+			mapJson.put("result","success");
+		}else {
+			//로그인 회원번호와 작성자 회원번호 불일치
+			mapJson.put("result","wrongAccess");
+		}
+		
+		
+		return mapJson;
+	}
+	/*===================
+	 답글 삭제
+	===================*/
+	@PostMapping("/board/deleteResponse")
+	@ResponseBody
+	public Map<String,Object> deleteResponse(
+									long te_num,
+									int mem_num,
+									HttpSession session){
+		log.debug("<<답글삭제 -te_num>> : " +te_num);
+		log.debug("<<답글삭제 -mem_num>> : " +mem_num);
+		
+		Map<String,Object> mapJson = new HashMap<String, Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			//로그인이 되지 않은 경우
+			mapJson.put("result","logout");
+			
+		}else if(user !=null && user.getMem_num()==mem_num) {
+			//로그인 회원번호와 작성자 회원번호 일치
+			//re_num 구하기
+			BoardResponseVO response = boardService.selectResponse(te_num);
+			//답글 삭제
+			boardService.deleteResponse(te_num);
+			int cnt = boardService.selectResponseCount(response.getRe_num());
+			
+			log.debug("<<답글 삭제 후 나머지 답글 개수>> : "+cnt);
+			
+			mapJson.put("cnt",cnt);
+			mapJson.put("result","success");
+		}else {
+			//로그인 회원번호와 작성자 회원번호 불일치
+			mapJson.put("result","wrongAccess");
+		}
+		
+		return mapJson;
+	}
+	
 }
 
 

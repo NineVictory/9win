@@ -138,7 +138,20 @@
 				a.*,
 				rownum rnum
 			  FROM (SELECT
-			  		  *
+			  		  re_num,
+			  		  <!-- ex: re_content가 <div>내용</div> 이거라면 &lt;div&gt;내용&lt;/div&gt; 이렇게 바뀐다. 즉 HTML 문서에서 태그로 인식되지 않고 문자 그대로 출력 되도록한다.  -->
+			  		  <![CDATA[
+			  		  REPLACE(REPLACE(re_content,'<','&lt;'),'>','&gt;') re_content, 
+			  		  ]]>
+			  		  re_date,
+			  		  re_mdate,
+			  		  board_num,
+			  		  mem_num,
+			  		  id,
+			  		  nick_name,
+			  		  click_num,
+			  		  refav_cnt,
+			  		  resp_cnt
 			  		FROM spboard_reply
 			  		JOIN spmember USING(mem_num)
 			  		/*로그인한 상태에서 클릭한 사람의 정보읽기, 로그인하지 않으면 0 전달*/
@@ -178,7 +191,45 @@
 			#{mem_num})
 		
 	</insert>
+	<!-- 답글 목록 -->
+	<select id="selectListResponse" parameterType="long" resultType="boardResponseVO">
+		SELECT
+			r.te_num,
+			r.te_content,
+			r.mem_num,
+			a.id,
+			a.nick_name,
+			r.te_date,
+			r.te_mdate,
+			r.te_ip,
+			r.re_num,
+			r.te_depth,
+			r.te_parent_num,
+			m.id parent_id, <!-- 알리아스를 줌 -->
+			m.nick_name pnick_name <!-- 알리아스 -->
+		FROM spboard_response r
+		JOIN spmember a ON r.mem_num = a.mem_num
+		LEFT OUTER JOIN spboard_response s ON r.te_parent_num=s.te_num
+		LEFT OUTER JOIN spmember m ON s.mem_num=m.mem_num
+		WHERE r.re_num=#{re_num}
+		START WITH r.te_depth=0 CONNECT BY PRIOR r.te_num=r.te_parent_num ORDER SIBLINGS BY r.te_num DESC
+	</select>
+	<!-- 답글 삭제 -->
+	<delete id="deleteResponse" parameterType="long">
+		DELETE FROM spboard_response WHERE te_num IN(
+			SELECT te_num
+			FROM spboard_response
+			START WITH te_num=#{te_num}
+			CONNECT BY PRIOR te_num = te_parent_num
+		)
+	</delete>
  </mapper>
+
+
+
+
+
+
 
 
 

@@ -22,6 +22,9 @@
 		<li><input type="button" class="menu-btn" value="비밀번호변경"
 			onclick="location.href='changePassword'">
 		</li>
+		<li><input type="button" class="menu-btn" value="채팅"
+			onclick="location.href='${pageContext.request.contextPath}/talk/talkList'">
+		</li>	
 		<li><input type="button" class="menu-btn" value="회원탈퇴"
 			onclick="location.href='delete'">
 		</li>
