@@ -14,10 +14,10 @@ public interface TalkService {
 	//채팅방 생성
 	public void insertTalkRoom(TalkRoomVO talkRoomVO);
 	//채팅방 멤버 읽기
-	public List<TalkMemberVO> selectTalkmember(Long talkroom_num);	
+	public List<TalkMemberVO> selectTalkMember(Long talkroom_num);	
 	//채팅 메시지 등록
 	public void insertTalk(TalkVO talkVO);
 	//채팅 메시지 읽기
-	public List<TalkVO> sleectTalkDetail(Map<String,Long> map);
+	public List<TalkVO> selectTalkDetail(Map<String,Long> map);
 
 }
