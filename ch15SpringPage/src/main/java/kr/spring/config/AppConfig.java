@@ -7,15 +7,28 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
+import kr.spring.interceptor.AutoLoginCheckInterceptor;
 import kr.spring.interceptor.WriterCheckInterceptor;
 import kr.spring.interceptor.loginCheckInterceptor;
+import kr.spring.websocket.SocketHandler;
 
 //자바코드 기반 설정 클래스
 @Configuration
-public class AppConfig implements WebMvcConfigurer{
+@EnableWebSocket
+public class AppConfig implements WebMvcConfigurer, WebSocketConfigurer{
+	private AutoLoginCheckInterceptor autoLoginCheck;
 	private loginCheckInterceptor loginCheck;
 	private WriterCheckInterceptor writerCheck;
+	
+	@Bean
+	public AutoLoginCheckInterceptor interceptor() {
+		autoLoginCheck = new AutoLoginCheckInterceptor();
+		return autoLoginCheck;
+	}
 	
 	@Bean
 	public loginCheckInterceptor interceptor2() {
@@ -31,6 +44,17 @@ public class AppConfig implements WebMvcConfigurer{
 	
 		@Override
 		public void addInterceptors(InterceptorRegistry registry) {
+			//AutoLoginCheckInterceptor 설정
+			registry.addInterceptor(autoLoginCheck)
+					.addPathPatterns("/**")
+					.excludePathPatterns("/images/**") //excludePathPatterns는 등록을 안한다.
+					.excludePathPatterns("/images_upload/**")
+					.excludePathPatterns("/upload/**")
+					.excludePathPatterns("/css/**")
+					.excludePathPatterns("/js/**")
+					.excludePathPatterns("/member/login")
+					.excludePathPatterns("/member/logout");
+			
 			//LoginCheckInterceptor 설정 
 			registry.addInterceptor(loginCheck).addPathPatterns("/member/myPage")
 												.addPathPatterns("/member/update")
@@ -67,6 +91,13 @@ public class AppConfig implements WebMvcConfigurer{
 				                  new TilesViewResolver();
 		tilesViewResolver.setViewClass(TilesView.class);
 		return tilesViewResolver;
+	}
+	
+	//웹소켓 세팅
+	@Override
+	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+		registry.addHandler(new SocketHandler(), "message-ws").setAllowedOrigins("*");
+		
 	}
 }
 

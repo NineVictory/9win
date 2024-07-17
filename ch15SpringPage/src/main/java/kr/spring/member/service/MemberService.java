@@ -16,7 +16,7 @@ public interface MemberService {
 	public void deleteMember(Long mem_num);
 	//자동 로그인 처리
 	public void updateAu_id(String au_id,Long mem_num);
-	public void selectAu_id(String au_id);
+	public MemberVO selectAu_id(String au_id);
 	public void deleteAu_id(Long mem_num);
 
 	//비밀번호 찾기

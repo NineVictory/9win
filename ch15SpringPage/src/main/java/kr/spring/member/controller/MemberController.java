@@ -2,7 +2,9 @@ package kr.spring.member.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -99,7 +101,23 @@ public class MemberController {
 			}
 			if(check) {//인증 성공
 				// ==== 자동로그인 체크 시작 ====//
-	
+				Boolean autoLogin = memberVO.getAuto()!=null && memberVO.getAuto().equals("on");
+				if(autoLogin) {
+					//자동로그인을 체크한 경우
+					String au_id = member.getAu_id();
+					if(au_id==null) {
+						//자동로그인 체크 식별값 생성
+						au_id = UUID.randomUUID().toString();
+						log.debug("<<au_id>>:"+au_id);
+						member.setAu_id(au_id);
+						memberService.updateAu_id(member.getAu_id(), member.getMem_num());
+					}
+					Cookie auto_cookie = new Cookie("au-log",au_id);
+					auto_cookie.setMaxAge(60*60*24*7); //쿠키의 유효기간은 1주일 (자동 로그인 기간을 1주일) -1주일동안 로그인을 안하면 풀린다.
+					auto_cookie.setPath("/");
+					
+					response.addCookie(auto_cookie);
+				}
 				// ==== 자동로그인 체크 끝 ====//
 				
 				//인증 성공, 로그인 처리
@@ -135,11 +153,18 @@ public class MemberController {
 	 * 로그아웃
 	 ===============================*/
 	@GetMapping("/member/logout")
-	public String processLogout(HttpSession session) { //로그아웃은 세션에있는 속성들을 다 지워야되기 떄문에 session이 필요
+	public String processLogout(HttpSession session, HttpServletResponse response) { //로그아웃은 세션에있는 속성들을 다 지워야되기 떄문에 session이 필요
 		//로그아웃
 		session.invalidate();
 		
 		// ==== 자동로그인 시작 ====//
+		//클라이언트 쿠키 처리
+		Cookie auto_cookie = new Cookie("au-log","");
+		auto_cookie.setMaxAge(0); //쿠키삭제
+		auto_cookie.setPath("/");
+		
+		response.addCookie(auto_cookie);
+		
 		// ==== 자동로그인 끝 ====//
 		
 		return "redirect:/main/main";
